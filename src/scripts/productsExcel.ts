@@ -41,6 +41,7 @@ function checkProduct(product: string[]): productExcelItem {
             type: product[4],
             catalog: "",
             stock: parseFloat(product[5]),
+            cloud:0
         },
         issue: [],
     }
