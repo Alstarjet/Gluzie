@@ -3,8 +3,7 @@ import { paymentsDB } from "../../database/paymentsDBController";
 import { chargesDB } from "../../database/chargesDBController";
 
 import type { client } from '../../interfaces/client'
-import type { payment } from '../../interfaces/payment'
-import type { charge } from '../../interfaces/catalog'
+
 
 
 interface ClientItemProps {
@@ -20,8 +19,7 @@ interface AmoutInfo {
 }
 
 function ClientSummary({ DataClient }:ClientItemProps) {
-    const [payments, setPayments] = useState<payment[]>([]);
-    const [charges, setCharges] = useState<charge[]>([]);
+
     const [showinfo, setShowInfo] = useState<AmoutInfo[]>([]);
     const [debt, setDebt] = useState(0);
 
@@ -62,8 +60,7 @@ function ClientSummary({ DataClient }:ClientItemProps) {
                 showAmouts.sort((a, b) => b.date.getTime() - a.date.getTime());
                 setDebt(totalCharges-totalPayments)
                 setShowInfo(showAmouts)
-                setPayments(paymentsClient);
-                setCharges(chargesClient)
+
             } catch (error) {
                 console.error("Error al cargar los pagos o cargos desde la base de datos: ", error);
             }
