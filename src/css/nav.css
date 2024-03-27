@@ -1,0 +1,39 @@
+@media (max-width: 768px) {
+    nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 90%;
+    }
+}
+
+/* Estilos para dispositivos de escritorio */
+@media (min-width: 769px) {
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+}
+
+nav {
+    background-color: #4F709C;
+    margin: auto;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 0.5rem;
+}
+
+nav a {
+    color: #E5D283;
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #213555;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border-color: none;
+}

@@ -1,0 +1,15 @@
+.formRegister{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.formRegister div{
+    display: grid;
+    grid-template-columns: 25% 75%;
+    margin-bottom: 0.9rem;
+    max-width: 500px;
+}
+.FormView{
+    display: flex;
+    flex-direction: column;
+}

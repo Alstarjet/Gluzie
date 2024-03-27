@@ -1,0 +1,34 @@
+.clientItem {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    position: relative;
+    padding: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+.clientItem p{
+    margin: 0.3rem 0;
+}
+
+.clientItem button {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    padding: 0.4rem 0.8rem;
+}
+.texthidden {
+    overflow: hidden;
+    text-overflow: ellipsis; /* Esto cortará el texto y mostrará puntos suspensivos (...) si se desborda */
+    white-space: nowrap; /* Esto evitará que el texto haga saltos de línea */
+
+}
+
+.clientItemExcel {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    position: relative;
+    padding: 0.3rem;
+    margin-bottom: 0.2rem;
+}
+.clientItemExcel p{
+    margin: 0.1rem 0;
+}
