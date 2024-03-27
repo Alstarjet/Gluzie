@@ -1,0 +1,21 @@
+.seachAndAdd{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.seachAndAdd input{
+    width: 100%;
+}
+.seachAndAdd a{
+    display: flex;
+    margin-left: 0.5rem;
+}
+.seachAndAdd a p{
+    line-height: 1.9rem;
+    margin: 0;
+}
+.seachAndAdd a .IcoAdd{
+    width: 2rem;
+    height: 2rem;
+    margin: 0 0.2rem;
+}
