@@ -1,0 +1,9 @@
+.Databoard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.Databoard a{
+    margin-bottom: 1rem;
+}

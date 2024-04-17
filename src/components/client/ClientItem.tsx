@@ -5,9 +5,9 @@ interface ClientItemProps {
   DataClient: client; // Corrección del nombre de la propiedad y del tipo
 }
 function ClientItem({ DataClient }: ClientItemProps) {
-  const link = "profile/" + DataClient.clientuuid; // Corrección de la variable 'link'
+  const link = "profile/" + DataClient.uuid; // Corrección de la variable 'link'
   return (
-    <div key={DataClient.clientuuid} className='clientItem cardClear'>
+    <div key={DataClient.uuid} className='clientItem cardClear'>
         <p className="texthidden">{DataClient.name} {DataClient.lastname}</p>
         <p>{DataClient.neighborhood}</p>
         <p>{DataClient.address}</p>

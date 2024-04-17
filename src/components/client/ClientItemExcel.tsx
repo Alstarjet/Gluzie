@@ -6,7 +6,7 @@ interface ClientItemProps {
 function ClientItemExcel({ DataClient }: ClientItemProps) {
 
   return (
-    <div key={DataClient.client.clientuuid} className={'clientItemExcel cardClear '}>
+    <div key={DataClient.client.uuid} className={'clientItemExcel cardClear '}>
         <p className="texthidden"><b>{DataClient.client.name} {DataClient.client.lastname}</b></p>
         <p><b>Colonia:</b>{DataClient.client.neighborhood}</p>
         <p><b>Direccon:</b>{DataClient.client.address}</p>

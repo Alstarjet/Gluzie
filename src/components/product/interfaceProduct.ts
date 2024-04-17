@@ -23,7 +23,8 @@ interface productCustomProps{
 }
 interface productsProps{
     Products:productCartItem[],
-    SetProducts: (products:productCartItem[]) => void,
+    Delete: (key:string) => void,
+    Update:(key:string, newQuantity:number)=>void,
 }
 interface productPropsAddOnly{
     AddProduct: (product:productCartItem) => void,

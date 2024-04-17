@@ -44,10 +44,11 @@ function checkClient(client: string[]): clientExcelItem {
             address: client[5],
             phone: client[6],
             daywork: client[7],
-            clientuuid: uuidv4(),
+            uuid: uuidv4(),
             cloud: 0,
             createat:new Date(),
-            updateat:new Date()
+            updateat:new Date(),
+            status:"active"
         },
         issue: [],
         amount: parseFloat(client[8])

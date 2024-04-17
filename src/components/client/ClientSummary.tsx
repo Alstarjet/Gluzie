@@ -27,8 +27,8 @@ function ClientSummary({ DataClient }:ClientItemProps) {
     useEffect(() => {
         async function fetchClientData() {
             try {
-                let paymentsClient = await paymentsDB.findPayments(DataClient.clientuuid);
-                let chargesClient = await chargesDB.findCharges(DataClient.clientuuid);
+                let paymentsClient = await paymentsDB.findPayments(DataClient.uuid);
+                let chargesClient = await chargesDB.findCharges(DataClient.uuid);
                 let totalPayments = 0
                 let totalCharges = 0
                 let showAmouts = []
@@ -36,8 +36,8 @@ function ClientSummary({ DataClient }:ClientItemProps) {
                 for (var i = 0; i < paymentsClient.length; i++) {
                     const AmoutInfo:AmoutInfo = {
                         uuid: paymentsClient[i].uuid,
-                        date: paymentsClient[i].date,
-                        dateString: paymentsClient[i].date.toLocaleString(),
+                        date: paymentsClient[i].createat,
+                        dateString: paymentsClient[i].createat.toLocaleString(),
                         amount: paymentsClient[i].amount,
                         cloud:paymentsClient[i].cloud,
                         type: "payment"
@@ -48,8 +48,8 @@ function ClientSummary({ DataClient }:ClientItemProps) {
                 for (var i = 0; i < chargesClient.length; i++) {
                     const AmoutInfo:AmoutInfo = {
                         uuid: chargesClient[i].uuid,
-                        date: chargesClient[i].date,
-                        dateString: chargesClient[i].date.toLocaleString(),
+                        date: chargesClient[i].createat,
+                        dateString: chargesClient[i].createat.toLocaleString(),
                         amount: chargesClient[i].finalprice,
                         cloud:chargesClient[i].cloud,
                         type: "charge"

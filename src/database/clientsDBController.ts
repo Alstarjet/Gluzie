@@ -10,7 +10,8 @@ function readClients(): Promise<client[]> {
 
             const request = store.getAll();
             request.onsuccess = function () {
-                resolve(request.result);
+                const clients = request.result.filter(charge => charge.status == "active");
+                resolve(clients);
             };
 
             request.onerror = function () {
@@ -96,6 +97,32 @@ function findClient(clientuuid:string):Promise<client> {
         }
     });
 }
+function readClientsOffCloud():Promise<client[]> {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const db = await openDatabase();
+            const transaction = db.transaction(keysDB.clients.Store, "readonly");
+            const store = transaction.objectStore(keysDB.clients.Store);
+
+            const index = store.index(keysDB.cloud.KeyPath); 
+            const request = index.getAll(0); 
+            request.onsuccess = function () {
+                const client = request.result;
+                if (client) {
+                    resolve(client);
+                } else {
+                    reject(new Error("Client not found"));
+                }
+            };
+
+            request.onerror = function () {
+                reject(request.error);
+            };
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
 
 
 const clientsDB ={
@@ -103,6 +130,7 @@ const clientsDB ={
     addClient,
     editClient,
     updateClientCloud,
-    findClient
+    findClient,
+    readClientsOffCloud
 }
 export {clientsDB}

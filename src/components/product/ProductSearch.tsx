@@ -43,7 +43,7 @@ function ProductSearch({AddProduct}:productPropsAddOnly) {
     return (
         
             <div className='ListScroll50'>
-                <input type="text" id="buscador" value={name} placeholder="Buscar Producto..." onChange={handleSearch} className='searchProduct' />
+                <input type="text" id="buscador" value={name} placeholder="Buscar Producto..." onChange={handleSearch} className='searchProduct' autoComplete ="off"/>
                 <table className='itemaSearchProduct'>
                     {ProductFilter.map(item => (
                         <ProductItem Product={item} AddProduct={AddProduct} />

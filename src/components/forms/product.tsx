@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import type { productInventoryItem } from '../../interfaces/catalog';
+import { catalogsDB } from "../../database/catalogsDBController";
+import type { catalog } from '../../interfaces/catalog';
 
 interface ProductFormProps {
   product: productInventoryItem;
@@ -7,6 +9,21 @@ interface ProductFormProps {
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({ product, onChange }) => {
+  const [catalog, setCatalog]=useState<catalog[]>()
+  useEffect(() => {
+    const fetchClient = async () => {
+        
+            try {
+                const clientDB = await catalogsDB.readCatalogs();
+                setCatalog(clientDB);
+            } catch (error) {
+                console.error("Error fetching ctalogs:", error);
+            }
+        
+    }
+    fetchClient();
+}, []);
+
   return (
     <div className='formRegister'>
       <div>
@@ -36,7 +53,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, onChange }) => {
           <option value="Metros">Metros</option>
           <option value="Kilos">Kilos</option>
           <option value="Litros">Litros</option>
-
+        </select>
+      </div>
+      <div>
+        Catalogo:
+        <select name="catalog" value={product.catalog} onChange={onChange} required>
+          <option value="Default">Default</option>
+          {catalog && catalog.map(item => (
+    <option value={item.name} key={item.key}>{item.name}</option>
+))}
         </select>
       </div>
     </div>

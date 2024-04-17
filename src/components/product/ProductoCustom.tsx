@@ -12,7 +12,7 @@ function ProductoCustom({ Products, AddProduct }:productCustomProps) {
         catalog:"",
         quantity: 1,
         total: 0,
-        productuuid:"null"
+        uuid:"null"
     })
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -50,7 +50,7 @@ function ProductoCustom({ Products, AddProduct }:productCustomProps) {
             catalog:"",
             quantity: 1,
             total: 0,
-            productuuid:"null"
+            uuid:"null"
         })
     }
 

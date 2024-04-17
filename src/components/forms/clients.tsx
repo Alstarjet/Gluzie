@@ -11,15 +11,15 @@ const ClientForm: React.FC<ClientFormProps> = ({ client, onChange }) => {
     <div className='formRegister'>
       <div>
         Nombre:
-        <input type="text" name="name" value={client.name} onChange={onChange} required />
+        <input type="text" name="name" value={client.name} onChange={onChange} required autoComplete ="off"/>
       </div>
       <div>
         Apellido:
-        <input type="text" name="lastname" value={client.lastname} onChange={onChange} required />
+        <input type="text" name="lastname" value={client.lastname} onChange={onChange} required autoComplete ="off"/>
       </div>
       <div>
         Edad:
-        <input type="number" name="age" value={client.age} onChange={onChange} required />
+        <input type="number" name="age" value={client.age} onChange={onChange} required autoComplete ="off" />
       </div>
       <div>
         Ciudad:
