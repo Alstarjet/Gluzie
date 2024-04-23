@@ -1,24 +1,26 @@
 import { useState, useEffect } from 'react';
 import { paymentsDB } from "../../database/paymentsDBController";
 import { chargesDB } from "../../database/chargesDBController";
+import ChargeSummary from '../charge/ChargeSummary'
+import PaymentSummary from '../payment/PaymentSummary'
 
 import type { client } from '../../interfaces/client'
+import type { charge } from '../../interfaces/catalog'
+import type { payment } from '../../interfaces/payment'
 
 
 
 interface ClientItemProps {
-  DataClient: client; // Corrección del nombre de la propiedad y del tipo
+    DataClient: client; // Corrección del nombre de la propiedad y del tipo
 }
 interface AmoutInfo {
-    uuid: string;
-    date: Date;
-    dateString: string;
-    amount: number;
-    cloud: 0 | 1;
+    payment: payment | undefined
+    charge: charge | undefined
+    date: Date
     type: string;
 }
 
-function ClientSummary({ DataClient }:ClientItemProps) {
+function ClientSummary({ DataClient }: ClientItemProps) {
 
     const [showinfo, setShowInfo] = useState<AmoutInfo[]>([]);
     const [debt, setDebt] = useState(0);
@@ -34,31 +36,27 @@ function ClientSummary({ DataClient }:ClientItemProps) {
                 let showAmouts = []
                 console.log(chargesClient)
                 for (var i = 0; i < paymentsClient.length; i++) {
-                    const AmoutInfo:AmoutInfo = {
-                        uuid: paymentsClient[i].uuid,
+                    const AmoutInfo: AmoutInfo = {
+                        payment: paymentsClient[i],
                         date: paymentsClient[i].createat,
-                        dateString: paymentsClient[i].createat.toLocaleString(),
-                        amount: paymentsClient[i].amount,
-                        cloud:paymentsClient[i].cloud,
+                        charge: undefined,
                         type: "payment"
                     }
-                    totalPayments=totalPayments+paymentsClient[i].amount
+                    totalPayments = totalPayments + paymentsClient[i].amount
                     showAmouts.push(AmoutInfo);
                 }
                 for (var i = 0; i < chargesClient.length; i++) {
-                    const AmoutInfo:AmoutInfo = {
-                        uuid: chargesClient[i].uuid,
+                    const AmoutInfo: AmoutInfo = {
+                        charge: chargesClient[i],
                         date: chargesClient[i].createat,
-                        dateString: chargesClient[i].createat.toLocaleString(),
-                        amount: chargesClient[i].finalprice,
-                        cloud:chargesClient[i].cloud,
+                        payment: undefined,
                         type: "charge"
                     }
-                    totalCharges=totalCharges+chargesClient[i].finalprice
+                    totalCharges = totalCharges + chargesClient[i].finalprice
                     showAmouts.push(AmoutInfo);
                 }
                 showAmouts.sort((a, b) => b.date.getTime() - a.date.getTime());
-                setDebt(totalCharges-totalPayments)
+                setDebt(totalCharges - totalPayments)
                 setShowInfo(showAmouts)
 
             } catch (error) {
@@ -73,26 +71,20 @@ function ClientSummary({ DataClient }:ClientItemProps) {
     return (
         <div className='pageUse'>
             <h3>Total de deuda: {debt}</h3>
-            <div className='tableSumamary'>
-                {showinfo.map(item => (
-                    <div className={"cardSummary class" + item.type+" Cloud"+item.cloud}>
-                        {item.type == "charge" ? (
-                            <div>Cargo</div>
+            <div className='tableSummary'>
+                {showinfo.map((item, index) => (
+                    <div key={index}>
+                        {item.type === "charge" && item.charge ? (
+                            <ChargeSummary Charge={item.charge} />
                         ) : (
-                            <div>Pago</div>
+                            item.type === "payment" && item.payment ? (
+                                <PaymentSummary Payment={item.payment} />
+                            ) : null
                         )}
-                        <div>{item.dateString}</div>
-                        <div>$ {item.amount}</div>
-                        {item.type == "charge" ? (
-                            <div><button>Info</button></div>
-                        ) : (
-                            <div></div>
-                        )}
-                        
                     </div>
                 ))}
             </div>
         </div>
-    )
+    );
 }
 export default ClientSummary;

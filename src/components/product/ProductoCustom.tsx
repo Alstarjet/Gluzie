@@ -1,29 +1,30 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import type { productCartItem } from '../../interfaces/catalog'
 import type { productCustomProps } from './interfaceProduct'
 
-function ProductoCustom({ Products, AddProduct }:productCustomProps) {
+function ProductoCustom({ Products, AddProduct }: productCustomProps) {
     const [product, setProduct] = useState<productCartItem>({
         name: "",
         price: 0,
         key: 'nill',
         page: 'nill',
         type: "",
-        catalog:"",
+        catalog: "",
         quantity: 1,
         total: 0,
-        uuid:"null"
+        uuid: "null"
     })
 
-    const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        if (name=="price"){
+        if (name == "price") {
             var intValue = parseFloat(value)
             setProduct(prevProduct => ({
                 ...prevProduct,
-                [name]: intValue
+                [name]: intValue,
+                ["total"]:intValue
             }));
-        }else{
+        } else {
             setProduct(prevProduct => ({
                 ...prevProduct,
                 [name]: value
@@ -34,8 +35,8 @@ function ProductoCustom({ Products, AddProduct }:productCustomProps) {
 
     const handleSubmit = () => {
         let NewProduct = product
-        NewProduct.key="X"+(+Math.floor(Math.random() * 899) + 100)+Products.length
-        if(NewProduct.name==""||NewProduct.price==0){
+        NewProduct.key = "X" + (+Math.floor(Math.random() * 899) + 100) + Products.length
+        if (NewProduct.name == "" || NewProduct.price == 0 || isNaN(NewProduct.price)) {
             alert("Precio o Nombre no valido");
             return
         }
@@ -47,10 +48,10 @@ function ProductoCustom({ Products, AddProduct }:productCustomProps) {
             key: 'nill',
             page: "nill",
             type: "",
-            catalog:"",
+            catalog: "",
             quantity: 1,
             total: 0,
-            uuid:"null"
+            uuid: "null"
         })
     }
 

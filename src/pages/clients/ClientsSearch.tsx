@@ -16,7 +16,8 @@ function ClientSearch({ }) {
     const { value } = event.target;
     setName(value);
     clients.forEach(Client => {
-      const SinAcentos = Client.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const name:string=Client.name +" "+Client.lastname
+      const SinAcentos = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       const upperCase = SinAcentos.toUpperCase();
       const letras = value.toUpperCase()
       const regex = new RegExp(letras.split('').join('.*'), 'i');

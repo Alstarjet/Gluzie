@@ -33,7 +33,7 @@ function ClientCharge() {
                     setCharge(prevState => ({
                         ...prevState,
                         clientuuid: clientDB.uuid,
-                        clientname: clientDB.name +" " +clientDB.lastname
+                        clientname: clientDB.name + " " + clientDB.lastname
                     }))
 
                 } catch (error) {
@@ -48,12 +48,20 @@ function ClientCharge() {
         window.history.back();
     };
     const saveCharge = () => {
+
         if (charge.products.length < 1) {
             alert("No tienes productos en la lista")
             return
         }
+        const resultado = window.confirm('¿El cargo es correcto?');
+        if (!resultado) {
+            return
+        }
         chargesDB.addCharge(charge)
+        alert("Cargo Guardado")
+        window.history.back();
     }
+
     return (
         <div className='ClearForm'>
             <button onClick={goBack}>Atras</button>

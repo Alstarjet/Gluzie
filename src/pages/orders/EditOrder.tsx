@@ -88,6 +88,7 @@ function EditOrder() {
         if (resultado) {
             let chargeDoc = {...charge}
             chargeDoc.status="active"
+            chargeDoc.cloud=0
             chargeDoc.createat=new Date()
             chargesDB.addCharge(chargeDoc);
             let crediterDoc = {...charge}

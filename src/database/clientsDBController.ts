@@ -124,13 +124,29 @@ function readClientsOffCloud():Promise<client[]> {
     });
 }
 
+async function GetEditClient(ClientObjs:client) {
+    const db = await openDatabase();
+    const transaction = db.transaction("clients", "readwrite");
+    const store = transaction.objectStore("clients");
 
+
+    ClientObjs.cloud = 1;
+    const updateRequest = store.put(ClientObjs);
+    updateRequest.onsuccess = function () {
+        console.log(`Los datos con ID ${ClientObjs} se actualizaron con éxito`);
+    };
+    updateRequest.onerror = function () {
+        console.log(`Error al actualizar los datos con ID ${ClientObjs}: ${(updateRequest.error as any).message}`);
+    };
+
+}
 const clientsDB ={
     readClients,
     addClient,
     editClient,
     updateClientCloud,
     findClient,
-    readClientsOffCloud
+    readClientsOffCloud,
+    GetEditClient
 }
 export {clientsDB}

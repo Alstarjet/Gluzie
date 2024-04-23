@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import ConsutDataOffCloud from '../../backend/postData'
+import React, { useState, useEffect } from 'react';
 import Login from '../../backend/login'
+import { postData } from '../../backend/postData'
+import {getData} from '../../backend/getData'
 
 
 function DataInfo() {
@@ -8,6 +9,16 @@ function DataInfo() {
     const [password, setPassword] = useState<string>('');
     const [status, setStatus] = useState<string>('login')
     const [name, setName] = useState<string>('');
+    useEffect(() => {
+        const Token = localStorage.getItem('Token')
+        if (Token != null && Token?.length > 3) {
+            setStatus("menue")
+            const Hello = localStorage.getItem('Hello')
+            if (Hello!=null){
+                setName(Hello)
+            }
+        }
+    }, [])
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -24,13 +35,24 @@ function DataInfo() {
             setStatus('menue')
             setName(response.hello)
         } else {
+            setStatus('login')
             alert("Email o Contraseña Incorrectos")
         }
-        ConsutDataOffCloud()
     };
-
+    async function PostData() {
+        let a = await postData()
+        if (!a) {
+            setStatus("login")
+        }
+    }
+    async function GetData() {
+        let a = await getData()
+        if (!a) {
+            setStatus("login")
+        }
+    }
     return (
-        <div>
+        <div className='pageUse'>
             {status == "login" && <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Correo Electrónico:</label>
@@ -56,9 +78,10 @@ function DataInfo() {
             </form>}
             {status == "menue" && <div>
                 <h2>Hola {name}</h2>
-                <button type="submit">Respaldar Datos</button>
+                <button onClick={PostData}>Respaldar Datos</button>
+                <button onClick={GetData}>Optener Datos</button>
             </div>}
-            
+
         </div>
 
     );

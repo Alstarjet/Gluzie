@@ -11,7 +11,6 @@ function CatalogRegister() {
   const [catalog, setCatalog] = useState<catalog>({
     key: uuidv4(),
     name: "",
-    description: "",
     status: "active"
   })
 
@@ -28,17 +27,14 @@ function CatalogRegister() {
   };
 
   const handleAddClient = () => {
-    if (catalog.name == "" || catalog.description == "") {
-      const resultado = window.confirm('¿Continuar el Guardado sin Adeudo Anterior?');
-      if (!resultado) {
+    if (catalog.name == ""|| catalog.name.length<3) {
+      alert('Nombre Invalido');
         return
-      }
     }
     catalogsDB.addCatalog(catalog);
     setCatalog({
       key: uuidv4(),
       name: "",
-      description: "",
       status: "active"
     })
     alert("Se Agrego el Catalogo")

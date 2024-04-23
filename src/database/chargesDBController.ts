@@ -102,7 +102,7 @@ function findCharges(clientuuid:string): Promise<charge[]> {
             const index = store.index(keysDB.clients.KeyPathClient); // Índice para buscar por clientuuid
             const request = index.getAll(clientuuid); // Obtener todos los pagos para el clientuuid dado
             request.onsuccess = function () {
-                const charges = request.result.filter(charge => charge.status != "active");
+                const charges = request.result.filter(charge => charge.status == "active");
                 resolve(charges);
             };
 
@@ -114,12 +114,29 @@ function findCharges(clientuuid:string): Promise<charge[]> {
         }
     });
 }
+async function GetEditCharge(ChargeObjs:charge) {
+    const db = await openDatabase();
+    const transaction = db.transaction("charges", "readwrite");
+    const store = transaction.objectStore("charges");
+
+
+    ChargeObjs.cloud = 1;
+    const updateRequest = store.put(ChargeObjs);
+    updateRequest.onsuccess = function () {
+        console.log(`Los datos con ID ${ChargeObjs} se actualizaron con éxito`);
+    };
+    updateRequest.onerror = function () {
+        console.log(`Error al actualizar los datos con ID ${ChargeObjs}: ${(updateRequest.error as any).message}`);
+    };
+
+}
 const chargesDB ={
     readCharges,
     addCharge,
     editCharge,
     updateChargeCloud,
     findCharges,
-    readChargesOffCloud
+    readChargesOffCloud,
+    GetEditCharge
 }
 export {chargesDB}

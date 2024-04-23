@@ -15,7 +15,6 @@ interface charge{
 interface catalog {
     key:string
     name:string,
-    description:string,
     status:"deleted"|"active"
 }
 interface product {

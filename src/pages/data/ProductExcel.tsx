@@ -21,6 +21,13 @@ function ProductExcel() {
   }
 
   const saveAllproducts = () => {
+    if (catalogCh=="Default"){
+      const resultado = window.confirm('¿Continuar sin asignar un Catalogo?');
+      if (!resultado) {
+        return
+      }
+    }
+
     const resultado = window.confirm('¿Quieres Guardar estos productos?');
     if (!resultado) {
       return

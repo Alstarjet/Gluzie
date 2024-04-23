@@ -1,10 +1,40 @@
-#root {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
-  margin-bottom: 3rem;
+
+
+@media (min-width: 769px) {
+  #root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    margin-top: 3rem;
+  }
+}
+@media (max-width: 768px) {
+  #root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    margin-bottom: 3rem;
+  }
 }
 
+.pageUse button{
+  background-color: #3275cc;
+  color: aliceblue;
+}
+.ProductList{
+  display: flex;
+  justify-content: space-around;
+}
+.CardProduct{
+  background-color: cadetblue;
+  color: aliceblue;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}

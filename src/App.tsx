@@ -40,7 +40,6 @@ import { useState } from "react";
 
 function App() {
   const[count,setCout]=useState<number>(0)
-  console.log(count)
   function Conejo(){
     if (count==5){
       

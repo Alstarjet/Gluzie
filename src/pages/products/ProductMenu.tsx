@@ -16,7 +16,6 @@ function ProductMenu({ }) {
             catalogsDBs.push({
                 key: "Default",
                 name: "allproducts",
-                description: "",
                 status: "active"
             })
             setProducts(catalogsDBs);
@@ -29,7 +28,7 @@ function ProductMenu({ }) {
         loadProducts();
     }, []);
     return (
-        <div>
+        <div className='pageUse'>
             <div className='seachAndAdd'>
                 <Link to="/catalogregister" className="ToLink">
                     <RiAddCircleFill className='IcoAdd' />

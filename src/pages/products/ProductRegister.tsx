@@ -40,7 +40,16 @@ function ProductRegister() {
       alert("Nombre Invalido")
       return
     }
+    if(product.catalog=="Default"){
+      const resultado = window.confirm('¿Continuar el guardado sin catalogo asignado?');
+      if (!resultado) {
+          return
+      }
+    }
+
     productsDB.addProduct(product);
+    alert(product.name+" Ha si agregado")
+
     setProduct({
       uuid: uuidv4(),
       name: "",

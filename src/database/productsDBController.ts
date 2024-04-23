@@ -126,12 +126,45 @@ function readProductsOffCloud(): Promise<productInventoryItem[]> {
     });
 }
 
+async function updateProductCloud(ProductObjs:productInventoryItem) {
+    const db = await openDatabase();
+    const transaction = db.transaction(keysDB.products.Store, "readwrite");
+    const store = transaction.objectStore(keysDB.products.Store);
+
+
+    ProductObjs.cloud = 1;
+    const updateRequest = store.put(ProductObjs);
+    updateRequest.onsuccess = function () {
+        console.log(`Los datos con ID ${ProductObjs} se actualizaron con éxito`);
+    };
+    updateRequest.onerror = function () {
+        console.log(`Error al actualizar los datos con ID ${ProductObjs}: ${(updateRequest.error as any).message}`);
+    };
+
+}
+async function GetEditProduct(ProductObjs:productInventoryItem) {
+    const db = await openDatabase();
+    const transaction = db.transaction(keysDB.products.Store, "readwrite");
+    const store = transaction.objectStore(keysDB.products.Store);
+
+    ProductObjs.cloud=0
+    const updateRequest = store.put(ProductObjs);
+    updateRequest.onsuccess = function () {
+        console.log(`Los datos con ID ${ProductObjs} se actualizaron con éxito`);
+    };
+    updateRequest.onerror = function () {
+        console.log(`Error al actualizar los datos con ID ${ProductObjs}: ${(updateRequest.error as any).message}`);
+    };
+
+}
 const productsDB ={
     readProducts,
     addProduct,
     editProduct,
     findProduct,
     readProductPerCatalog,
-    readProductsOffCloud
+    readProductsOffCloud,
+    updateProductCloud,
+    GetEditProduct
 }
 export {productsDB}

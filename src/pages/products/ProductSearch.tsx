@@ -49,7 +49,7 @@ function ProductSearch({ }) {
     loadProducts();
   }, [catalog]);
   return (
-    <div>
+    <div className='pageUse'>
       {catalog == "allproducts" ? (
         <h2>Lista de todos los Productos</h2>
       ) : (

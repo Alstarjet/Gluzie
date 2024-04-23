@@ -34,7 +34,7 @@ function AddPayment({DataClient}:ClientComponents) {
     };
     const handleNewPayment = () => {
         let newPayment=payment
-        if (newPayment.amount < 1) {
+        if (newPayment.amount < 1|| isNaN(newPayment.amount)) {
             alert("Necesitas Agregar una cantida");
             return
         }

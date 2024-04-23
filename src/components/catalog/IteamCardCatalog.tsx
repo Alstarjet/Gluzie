@@ -12,7 +12,6 @@ const IteamCardCatalog:React.FC<cardCatalogPro>=({Catalog})=> {
   return (
     <div key={Catalog.key}>
         <td>{name}</td>
-        <td>{Catalog.description}</td>
         <Link to={link}><button className='button-5'>Seleccionar</button></Link>
     </div>
   )

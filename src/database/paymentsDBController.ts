@@ -115,7 +115,22 @@ function readPaymentsOffCloud(): Promise<payment[]> {
         }
     });
 }
+async function GetEditPayment(PaymentObjs:payment) {
+    const db = await openDatabase();
+    const transaction = db.transaction("payments", "readwrite");
+    const store = transaction.objectStore("payments");
 
+
+    PaymentObjs.cloud = 0;
+    const updateRequest = store.put(PaymentObjs);
+    updateRequest.onsuccess = function () {
+        console.log(`Los datos con ID ${PaymentObjs} se actualizaron con éxito`);
+    };
+    updateRequest.onerror = function () {
+        console.log(`Error al actualizar los datos con ID ${PaymentObjs}: ${(updateRequest.error as any).message}`);
+    };
+
+}
 
 const paymentsDB ={
     readPayments,
@@ -123,6 +138,7 @@ const paymentsDB ={
     editPayment,
     updatePaymentCloud,
     findPayments,
-    readPaymentsOffCloud
+    readPaymentsOffCloud,
+    GetEditPayment
 }
 export {paymentsDB}

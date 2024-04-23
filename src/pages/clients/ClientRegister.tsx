@@ -51,7 +51,6 @@ function ClientRegister() {
   const handleAddClient = () => {
     if (
       client.name &&
-
       client.uuid &&
       client.address &&
       client.phone &&
@@ -59,13 +58,14 @@ function ClientRegister() {
     ) {
       const resultado = window.confirm('¿Los datos del cliente son correctos?');
       if (resultado) {
-        if (product.price < 1) {
+        if (product.price < 1|| Number.isNaN(product.price) ){
           const resultado = window.confirm('¿Continuar el Guardado sin Adeudo Anterior?');
           if (!resultado) {
             return
           }
+        }else{
+          AddChargeDB(product, client)
         }
-        AddChargeDB(product, client)
         clientsDB.addClient(client);
         setClient({
           name: '',

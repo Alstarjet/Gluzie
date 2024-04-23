@@ -1,6 +1,10 @@
+import {saveDataOfCloud} from './getData'
+import type {GetData} from '../interfaces/API'
 interface LoginResponse{
     token:string
     hello:string
+    data:GetData
+    newdevice:boolean
 }
 interface LoginReturn{
     ok:boolean
@@ -29,13 +33,16 @@ async function Login(email:string, password:string):Promise<LoginReturn> {
             },
             body: JSON.stringify({ email, password,device })
         });
-        
         if (!response.ok) {
             throw new Error('Credenciales inválidas');
         }
 
         const data:LoginResponse = await response.json();
+        if (data.newdevice){
+            saveDataOfCloud(data.data)
+        }
         localStorage.setItem('Token', data.token);
+        localStorage.setItem('Hello', data.hello);
         ret.hello=data.hello
         return ret
     } catch (error) {

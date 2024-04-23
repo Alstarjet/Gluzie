@@ -13,10 +13,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ catalog, onChange }) => {
         Nombre del Catalogo
         <input type="text" name="name" value={catalog.name} onChange={onChange} required />
       </div>
-      <div>
-        Descripción:
-        <input type="text" name="description" value={catalog.description} onChange={onChange} required />
-      </div>
     </div>
   );
 };

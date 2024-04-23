@@ -7,3 +7,11 @@
 .Databoard a{
     margin-bottom: 1rem;
 }
+.Databoard button{
+    background-color: #3275cc;
+    color: aliceblue;
+}
+.viewFull  button{
+    background-color: #3275cc;
+    color: aliceblue;
+}

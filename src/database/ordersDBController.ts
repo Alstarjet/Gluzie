@@ -41,8 +41,8 @@ async function addOrder(chargeData:charge):Promise<boolean> {
 }
 async function editOrder(OrderObjs:charge) {
     const db = await openDatabase();
-    const transaction = db.transaction("orders", "readwrite");
-    const store = transaction.objectStore("orders");
+    const transaction = db.transaction(keysDB.orders.Store, "readwrite");
+    const store = transaction.objectStore(keysDB.orders.Store);
 
 
     OrderObjs.cloud = 0;
@@ -57,8 +57,8 @@ async function editOrder(OrderObjs:charge) {
 }
 async function updateOrderCloud(OrderObjs:charge) {
     const db = await openDatabase();
-    const transaction = db.transaction("orders", "readwrite");
-    const store = transaction.objectStore("orders");
+    const transaction = db.transaction(keysDB.orders.Store, "readwrite");
+    const store = transaction.objectStore(keysDB.orders.Store);
 
 
     OrderObjs.cloud = 1;
@@ -140,6 +140,22 @@ function readOrdersOffCloud(): Promise<charge[]> {
         }
     });
 }
+async function GetEditOrder(OrderObjs:charge) {
+    const db = await openDatabase();
+    const transaction = db.transaction(keysDB.orders.Store, "readwrite");
+    const store = transaction.objectStore(keysDB.orders.Store);
+
+
+    OrderObjs.cloud = 1;
+    const updateRequest = store.put(OrderObjs);
+    updateRequest.onsuccess = function () {
+        console.log(`Los datos con ID ${OrderObjs} se actualizaron con éxito`);
+    };
+    updateRequest.onerror = function () {
+        console.log(`Error al actualizar los datos con ID ${OrderObjs}: ${(updateRequest.error as any).message}`);
+    };
+
+}
 const ordersDB ={
     readOrders,
     addOrder,
@@ -147,6 +163,7 @@ const ordersDB ={
     updateOrderCloud,
     findOrders,
     findOrder,
-    readOrdersOffCloud
+    readOrdersOffCloud,
+    GetEditOrder
 }
 export {ordersDB}
