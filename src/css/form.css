@@ -13,3 +13,14 @@
     display: flex;
     flex-direction: column;
 }
+
+.ClearForm + nav{
+    display: none;
+}
+.orderItem p{
+margin: 0;
+}
+.orderItem{
+    padding: 0.5rem;
+    margin-bottom: 0.3rem;
+}

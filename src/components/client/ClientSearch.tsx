@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link,} from "react-router-dom";
-import ClientItem from '../../components/client/ClientItem';
 import { clientsDB } from "../../database/clientsDBController";
-import { RiAddCircleFill } from "react-icons/ri";
-
 import type { client } from '../../interfaces/client'
 
-function ClientSearch({ }) {
+interface ClientSearchProps{
+  Select:(Client:client)=> void
+}
+
+function ClientSearch({Select }:ClientSearchProps) {
   const [clients, setClients] = useState<client[]>([]);
   const [name, setName] = useState<string>('')
   const [ArrayClientsFilter, setArray] = useState<client[]>(clients)
@@ -16,8 +16,7 @@ function ClientSearch({ }) {
     const { value } = event.target;
     setName(value);
     clients.forEach(Client => {
-      const name:string=Client.name +" "+Client.lastname
-      const SinAcentos = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const SinAcentos = Client.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + Client.lastname.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       const upperCase = SinAcentos.toUpperCase();
       const letras = value.toUpperCase()
       const regex = new RegExp(letras.split('').join('.*'), 'i');
@@ -43,13 +42,19 @@ function ClientSearch({ }) {
   return (
     <div>
       <div className='seachAndAdd'>
-      <input type="text" id="buscador" value={name} placeholder="Buscar Cliente..." onChange={handleChange} className='searchClient' />
-      <Link to="/clientregister" className="ToLink"><RiAddCircleFill className='IcoAdd'/><p>Nuevo</p></Link>
+        <input type="text" id="buscador" value={name} placeholder="Buscar Cliente..." onChange={handleChange} className='searchClient' autoComplete ="off"/>
       </div>
-      {ArrayClientsFilter.map(item => (
-        <ClientItem DataClient={item} ></ClientItem>
-      ))}
+      {(name.length > 1) && <div >{ArrayClientsFilter.map(DataClient => (
+        <div key={DataClient.uuid} className='clientItem cardClear'>
+          <p className="texthidden">{DataClient.name} {DataClient.lastname}</p>
+          <p>{DataClient.neighborhood}</p>
+          <p>{DataClient.address}</p>
+          <button className='button-5' onClick={() => Select(DataClient)}>Seleccionar</button>
+        </div>
+      ))}</div>}
+
     </div>
+
   );
 }
 export default ClientSearch;

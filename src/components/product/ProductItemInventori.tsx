@@ -6,15 +6,17 @@ interface productPropsAdd{
 }
 
 function ProductItemList({Product}:productPropsAdd) {
-  const link = "/product/" + Product.productuuid; // Corrección de la variable 'link'
+  const link = "/product/" + Product.uuid; // Corrección de la variable 'link'
   return (
-    <tr key={Product.key}>
-        <td>{Product.key}</td>
+    <div key={Product.key} className='CardProduct'>
+      <div className='ProductList'>
+      <td>{Product.key}</td>
         <td>{Product.name}</td>
-        <td>{Product.page}</td>
         <td>${Product.price}</td>
+      </div>
+
         <Link to={link}><button className='button-5'>Seleccionar</button></Link>
-    </tr>
+    </div>
   )
 }
 export default ProductItemList;

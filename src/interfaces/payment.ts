@@ -5,7 +5,9 @@ interface payment {
     amount: number,
     method: string,
     concept: string,
-    date: Date,
+    createat:Date,
+    updateat:Date
     cloud: 0 | 1,
+    status:"deleted"|"active"
 }
 export type{payment}

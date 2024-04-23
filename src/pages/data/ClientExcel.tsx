@@ -18,42 +18,51 @@ function ClientExcel() {
     setClients(clients)
     setLoading(true)
   }
-  const saveClient = (client:client, amount:number) => {
-    if (amount>0){
-      const product:productCartItem={
-        productuuid:"nillCustom",
+  const saveClient = (client: client, amount: number) => {
+    if (amount > 0) {
+      const product: productCartItem = {
+        uuid: "nillCustom",
         name: "Adeudo Anterior",
         price: amount,
         key: 'nill',
         page: "",
-        quantity:1,
-        total:amount,
-        catalog:"",
-        type:"Deuda"
+        quantity: 1,
+        total: amount,
+        catalog: "",
+        type: "Deuda"
       }
       AddChargeDB(product, client)
     }
-        clientsDB.addClient(client);   
+    clientsDB.addClient(client);
   }
   const AddChargeDB = (product: productCartItem, client: client) => {
     let chargeFinal: charge = {
-      clientuuid: client.clientuuid,
-      clientname: client.name,
+      clientuuid: client.uuid,
+      clientname: client.name +" " +client.lastname,
       uuid: uuidv4(),
       products: [product],
       discount: 0,
       subtotal: product.price,
       finalprice: product.price,
-      date: new Date(),
-      cloud: 0
+      createat: new Date(),
+      updateat: new Date(),
+      cloud: 0,
+      status:"active"
     }
     chargesDB.addCharge(chargeFinal)
   }
-  const saveAllClients=()=>{
-    clientsExcel?.clients.forEach((element)=>{
-      saveClient(element.client,element.amount)
+  const saveAllClients = () => {
+    const resultado = window.confirm('¿Quieres Guardar estos Clientes?');
+    if (!resultado) {
+      return
+    }
+    clientsExcel?.clients.forEach((element) => {
+      saveClient(element.client, element.amount)
     })
     setLoading(false)
+    setTimeout(() => {
+      alert("Clientes Guardados")
+    }, 500);
   }
   return (
     <div className='FormView'>
@@ -74,11 +83,12 @@ function ClientExcel() {
         <div>
           <p>Puedes actualizar/completar la información de tus clientes despues de guardarlos, en la pestaña clientes</p>
         </div>
-        <button className='grandButton buttonBlue' onClick={()=>{saveAllClients()}}>Guardar Clientes</button>
-      </div> : null}
-      {clientsExcel?.clients.map(item => (
+        <button className='grandButton buttonBlue' onClick={() => { saveAllClients() }}>Guardar Clientes</button>
+        {clientsExcel?.clients.map(item => (
         <ClientItemExcel DataClient={item} ></ClientItemExcel>
       ))}
+      </div> : null}
+
     </div>
   );
 }

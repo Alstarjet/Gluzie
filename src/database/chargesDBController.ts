@@ -21,6 +21,27 @@ function readCharges(): Promise<charge[]> {
         }
     });
 }
+function readChargesOffCloud(): Promise<charge[]> {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const db = await openDatabase();
+            const transaction = db.transaction(keysDB.charges.Store, "readonly");
+            const store = transaction.objectStore(keysDB.charges.Store);
+
+            const index = store.index(keysDB.cloud.KeyPath); 
+            const request = index.getAll(0); 
+            request.onsuccess = function () {
+                resolve(request.result);
+            };
+
+            request.onerror = function () {
+                reject(request.error);
+            };
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
 async function addCharge(chargeData:charge):Promise<boolean> {
     const db = await openDatabase();
     const transaction = db.transaction(keysDB.charges.Store, "readwrite");
@@ -78,10 +99,11 @@ function findCharges(clientuuid:string): Promise<charge[]> {
             const transaction = db.transaction(keysDB.charges.Store, "readonly");
             const store = transaction.objectStore(keysDB.charges.Store);
 
-            const index = store.index(keysDB.clients.KeyPath); // Índice para buscar por clientuuid
+            const index = store.index(keysDB.clients.KeyPathClient); // Índice para buscar por clientuuid
             const request = index.getAll(clientuuid); // Obtener todos los pagos para el clientuuid dado
             request.onsuccess = function () {
-                resolve(request.result);
+                const charges = request.result.filter(charge => charge.status == "active");
+                resolve(charges);
             };
 
             request.onerror = function () {
@@ -92,11 +114,29 @@ function findCharges(clientuuid:string): Promise<charge[]> {
         }
     });
 }
+async function GetEditCharge(ChargeObjs:charge) {
+    const db = await openDatabase();
+    const transaction = db.transaction("charges", "readwrite");
+    const store = transaction.objectStore("charges");
+
+
+    ChargeObjs.cloud = 1;
+    const updateRequest = store.put(ChargeObjs);
+    updateRequest.onsuccess = function () {
+        console.log(`Los datos con ID ${ChargeObjs} se actualizaron con éxito`);
+    };
+    updateRequest.onerror = function () {
+        console.log(`Error al actualizar los datos con ID ${ChargeObjs}: ${(updateRequest.error as any).message}`);
+    };
+
+}
 const chargesDB ={
     readCharges,
     addCharge,
     editCharge,
     updateChargeCloud,
-    findCharges
+    findCharges,
+    readChargesOffCloud,
+    GetEditCharge
 }
 export {chargesDB}

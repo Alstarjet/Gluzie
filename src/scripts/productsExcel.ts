@@ -33,7 +33,7 @@ async function ReadProductsFromExcel(e: React.ChangeEvent<HTMLInputElement>): Pr
 function checkProduct(product: string[]): productExcelItem {
     let productExcel: productExcelItem = {
         product: {
-            productuuid:uuidv4(),
+            uuid:uuidv4(),
             key: product[0],
             name: product[1],
             price: parseFloat(product[2]),
@@ -41,7 +41,10 @@ function checkProduct(product: string[]): productExcelItem {
             type: product[4],
             catalog: "",
             stock: parseFloat(product[5]),
-            cloud:0
+            createat:new Date(),
+            updateat:new Date(),
+            cloud:0,
+            status:"active"
         },
         issue: [],
     }

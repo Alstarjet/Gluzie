@@ -14,7 +14,7 @@ function ClientEdit({ DataClient, Reload }:ClientItemProps) {
     name: DataClient.name,
     lastname:DataClient.lastname,
     age:DataClient.age,
-    clientuuid: DataClient.clientuuid,
+    uuid: DataClient.uuid,
     city:DataClient.city,
     neighborhood:DataClient.neighborhood,
     address: DataClient.address,
@@ -22,7 +22,8 @@ function ClientEdit({ DataClient, Reload }:ClientItemProps) {
     daywork: DataClient.daywork,
     cloud: 0,
     createat:DataClient.createat,
-    updateat:new Date()
+    updateat:new Date(),
+    status:"active"
   });
 
 
@@ -35,7 +36,7 @@ function ClientEdit({ DataClient, Reload }:ClientItemProps) {
     if (
       client.name &&
 
-      client.clientuuid &&
+      client.uuid &&
       client.address &&
       client.phone &&
       client.daywork

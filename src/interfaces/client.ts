@@ -1,4 +1,5 @@
 interface client{
+    uuid: string,
     name: string,
     lastname: string,
     age: number,
@@ -7,9 +8,9 @@ interface client{
     address: string,
     phone: string,
     daywork: string,
-    clientuuid: string,
     cloud: 0 | 1,
     createat:Date,
     updateat:Date
+    status:"deleted"|"active"
 }
 export type{client}

@@ -11,14 +11,16 @@ interface ClientComponents {
 
 function AddPayment({DataClient}:ClientComponents) {
     const [payment, setPayment] = useState<payment>({
-        clientuuid: DataClient.clientuuid,
-        clientname: DataClient.name,
+        clientuuid: DataClient.uuid,
+        clientname: DataClient.name+" "+DataClient.lastname,
         uuid: uuidv4(),
         amount: 0,
         method: 'Efectivo',
         concept: '',
-        date: new Date(),
-        cloud:0
+        createat: new Date(),
+        updateat:new Date(),
+        cloud:0,
+        status:"active"
     });
     const handleChange = (event:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
@@ -32,7 +34,7 @@ function AddPayment({DataClient}:ClientComponents) {
     };
     const handleNewPayment = () => {
         let newPayment=payment
-        if (newPayment.amount < 1) {
+        if (newPayment.amount < 1|| isNaN(newPayment.amount)) {
             alert("Necesitas Agregar una cantida");
             return
         }
@@ -41,18 +43,20 @@ function AddPayment({DataClient}:ClientComponents) {
         }
         paymentsDB.addPayment(payment)
         setPayment({
-            clientuuid: DataClient.clientuuid,
-            clientname: DataClient.name,
+            clientuuid: DataClient.uuid,
+            clientname: DataClient.name+" "+DataClient.lastname,
             uuid: uuidv4(),
             amount: 0,
             method: 'Efectivo',
             concept: '',
-            date: new Date(),
-            cloud:0
+            createat: new Date(),
+            updateat:new Date(),
+            cloud:0,
+            status:"active"
         })
       };
     return (
-        <div key={DataClient.clientuuid} className='viewFull'>
+        <div key={DataClient.uuid} className='viewFull'>
             
                 <h2>Nuevo Pago</h2>
                 

@@ -12,7 +12,7 @@ function ProductItem({Product,AddProduct}:productPropsAdd) {
     catalog: Product.catalog,
     quantity: 1,
     total: Product.price,
-    productuuid:Product.productuuid,
+    uuid:Product.uuid,
   }
 
   return (

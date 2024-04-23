@@ -1,21 +1,24 @@
 interface charge{
+    uuid: string,
     clientuuid: string,
     clientname: string,
-    uuid: string,
     products: productCartItem[],
     discount: number,
     subtotal: number,
     finalprice: number,
-    date: Date,
+    createat:Date,
+    updateat:Date,
+    status:"deleted"|"active"|"credited"
     cloud: 0 | 1,
 }
 
 interface catalog {
-    catalog:string,
-    description:string,
-    use:number
+    key:string
+    name:string,
+    status:"deleted"|"active"
 }
 interface product {
+    uuid:string,
     key: string;
     name: string;
     page: string;
@@ -26,8 +29,10 @@ interface product {
     quantity?: number;
     total?: number;
     stock?: number;
-    productuuid:string,
     cloud?: 0 | 1,
+    createat?:Date,
+    updateat?:Date
+    
 }
 
 // Ejemplo de uso donde se necesita el campo 'quantity'
@@ -40,5 +45,9 @@ interface productCartItem extends product {
 interface productInventoryItem extends product {
     stock: number,
     cloud: 0 | 1,
+    createat:Date,
+    updateat:Date
+    status:"deleted"|"active"
 }
+
 export type{charge,product,productInventoryItem,catalog,productCartItem}

@@ -6,7 +6,7 @@ interface ProductItemProps {
 function ProductItemExcel({ DataProduct }: ProductItemProps) {
 
   return (
-    <div key={DataProduct.product.productuuid} className={'clientItemExcel cardClear '}>
+    <div key={DataProduct.product.uuid} className={'clientItemExcel cardClear '}>
         <p className="texthidden"><b>{DataProduct.product.name}</b></p>
         <p><b>Clave:</b>{DataProduct.product.key}</p>
         <p><b>Precio:</b>{DataProduct.product.price}</p>
