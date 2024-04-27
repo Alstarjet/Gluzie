@@ -10,6 +10,7 @@ function DataExplore() {
       <h2><PiMicrosoftExcelLogoFill />Menu de Datos</h2>
       <Link to="/clientExcelUP"><button className='grandButton buttonBlue'><IoIosPeople />Cargar Clientes</button></Link>
       <Link to="/productExcelUP"><button className='grandButton buttonBlue'><LuBoxes />Cargar Productos</button></Link>
+      <Link to="/info"><button className='grandButton buttonBlue'><LuBoxes />Respaldo</button></Link>
     </div>
   );
 }

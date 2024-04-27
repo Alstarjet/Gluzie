@@ -36,7 +36,7 @@ function EditOrder() {
                         const ClientDB = await clientsDB.findClient(OrderDB.clientuuid)
                         setCharge(prevState => ({
                             ...prevState,
-                            clientname: ClientDB.name+" "+ClientDB.lastname,
+                            clientname: ClientDB.name + " " + ClientDB.lastname,
                             clientuuid: ClientDB.uuid
                         }));
                         setClient(ClientDB)
@@ -84,23 +84,25 @@ function EditOrder() {
             alert("Solo se pueden convertir a cargo los Pedidos con cliente asignado")
             return
         }
-        const resultado = window.confirm('Al convertir a cargo se eliminara de la lista de pedidos y se agregara como cargo al cliente:'+charge.clientname+ ':¿Continuamos?');
+        const resultado = window.confirm('Al convertir a cargo se eliminara de la lista de pedidos y se agregara como cargo al cliente:' + charge.clientname + ':¿Continuamos?');
         if (resultado) {
-            let chargeDoc = {...charge}
-            chargeDoc.status="active"
-            chargeDoc.cloud=0
-            chargeDoc.createat=new Date()
+            let chargeDoc = { ...charge }
+            chargeDoc.status = "active"
+            chargeDoc.cloud = 0
+            chargeDoc.createat = new Date()
             chargesDB.addCharge(chargeDoc);
-            let crediterDoc = {...charge}
-            crediterDoc.status="credited"
+            let crediterDoc = { ...charge }
+            crediterDoc.status = "credited"
             ordersDB.editOrder(crediterDoc)
             goBack()
         }
     }
     return (
-        <div className='viewFull ClearForm'>
-            <button onClick={goBack}>Atras</button>
-            <h3>Pedido del {date(charge.createat)}</h3>
+        <div className='ClearForm'>
+            <div className='HeadFormsBack'>
+                <button onClick={goBack}>Atras</button>
+                <h3>Pedido del {date(charge.createat)}</h3>
+            </div>
             {(client === undefined) && <div >
                 <ClientSearch Select={setClient} />
             </div>}
@@ -109,24 +111,26 @@ function EditOrder() {
                 <button onClick={() => { setClient(undefined) }}> Cambiar</button>
             </div>}
             <NewCharge client={client} charge={charge} setCharge={setCharge} />
-            <button onClick={credited}>Convertir a Cargo</button>
-            <button onClick={saveCharge}>Guardar Cambios</button>
+            <div className='TwoButtonFlex'>
+                <button onClick={credited} className='saveButton'>Convertir a Cargo</button>
+                <button onClick={saveCharge} className='saveButton'>Guardar Cambios</button>
+            </div>
         </div>
     )
 }
 export default EditOrder;
-function date(createat:Date):string{
+function date(createat: Date): string {
     const fecha = createat
-  const diasSemana: string[] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-  const meses: string[] = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    const diasSemana: string[] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const meses: string[] = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 
-  const dia: number = fecha.getDate();
-  const diaSemana: string = diasSemana[fecha.getDay()];
-  const mes: string = meses[fecha.getMonth()];
-  const año: number = fecha.getFullYear();
+    const dia: number = fecha.getDate();
+    const diaSemana: string = diasSemana[fecha.getDay()];
+    const mes: string = meses[fecha.getMonth()];
+    const año: number = fecha.getFullYear();
 
-  const hora: number = fecha.getHours(); // Obtener la hora (0-23)
-  const minutos: number = fecha.getMinutes();
-  const fechaFormateada: string = `${diaSemana}, ${dia} de ${mes} del ${año}, a las ${hora}:${minutos}`;
-  return fechaFormateada
+    const hora: number = fecha.getHours(); // Obtener la hora (0-23)
+    const minutos: number = fecha.getMinutes();
+    const fechaFormateada: string = `${diaSemana}, ${dia} de ${mes} del ${año}, a las ${hora}:${minutos}`;
+    return fechaFormateada
 }

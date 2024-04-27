@@ -156,7 +156,7 @@ function ClientRegister() {
         Cantidad $:
         <input type="number" name="price" value={product.price} onChange={handleChang} />
       </label>
-      <button onClick={handleAddClient} className='grandButton buttonBlue'>Crear Cliente</button>
+      <button onClick={handleAddClient} className='saveButton'>Crear Cliente</button>
     </div>
   );
 }
