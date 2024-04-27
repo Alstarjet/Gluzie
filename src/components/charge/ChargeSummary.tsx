@@ -11,9 +11,8 @@ function ChargeSummary({ Charge }: Charge) {
     })
     return (
         <div className='IteamSummary ChargeIteam'>
-                        <h4>Cargo</h4>
+            <h4>Cargo por la Cantidad: ${Charge.finalprice}</h4>
             <div>{formatDate(Charge.createat)}</div>
-            <div>Cantidad:${Charge.finalprice}</div>
             <div>Productos:{StringProduct}</div>
         </div>
     )

@@ -5,13 +5,15 @@ import ProductoCustom from "../product/ProductoCustom"
 import type { charge, productCartItem } from '../../interfaces/catalog'
 import { client } from '../../interfaces/client';
 
+import './NewCharge.css'
+
 interface ClientComponents {
-    client:client | undefined;
+    client: client | undefined;
     setCharge: React.Dispatch<React.SetStateAction<charge>>,
     charge: charge
-  }
+}
 
-function NewCharge({client,charge,setCharge}:ClientComponents) {
+function NewCharge({ client, charge, setCharge }: ClientComponents) {
     const [sourceProd, setSourceProd] = useState("catalog")
 
     const AddProduct = (product: productCartItem) => {
@@ -69,11 +71,11 @@ function NewCharge({client,charge,setCharge}:ClientComponents) {
 
     };
     const calculateFinalWDiscount = () => {
-        let discountAmount:number
-        if (isNaN(charge.discount)){
+        let discountAmount: number
+        if (isNaN(charge.discount)) {
             discountAmount = (charge.subtotal * 0) / 100;
 
-        }else{
+        } else {
             discountAmount = (charge.subtotal * charge.discount) / 100;
         }
         const finalPrice = charge.subtotal - discountAmount;
@@ -96,20 +98,20 @@ function NewCharge({client,charge,setCharge}:ClientComponents) {
         calculateFinalWDiscount()
     }, [charge.products, charge.subtotal, charge.discount]);
     return (
-        <div className='viewFull'>
-            <div className='flexdist'>
+        <div className='NewChargeComponent'>
+            <div className='SelectTypeCharge'>
                 <button onClick={() => setSourceProd('catalog')}>Catálogo</button>
                 <button onClick={() => setSourceProd('custom')}>Especial</button>
             </div>
-            <div className='view70'>
-                {sourceProd == 'catalog' ? (
-                    <ProductSearch AddProduct={AddProduct}></ProductSearch>
-                ) : (
-                    <ProductoCustom Products={charge.products} AddProduct={AddProduct}></ProductoCustom>
-                )}
-                {charge.products.length > 0 && <ProductoPreCharge Products={charge.products} Delete={DeleteProduct} Update={UpdateProduct}></ProductoPreCharge>}
-            </div>
-            <div className='flexRight'>
+
+            {sourceProd == 'catalog' ? (
+                <ProductSearch AddProduct={AddProduct}></ProductSearch>
+            ) : (
+                <ProductoCustom Products={charge.products} AddProduct={AddProduct}></ProductoCustom>
+            )}
+            {charge.products.length > 0 && <ProductoPreCharge Products={charge.products} Delete={DeleteProduct} Update={UpdateProduct}></ProductoPreCharge>}
+
+            <div className='CostResum'>
                 <label>
                     Descuento:
                     <input type="number" name="discout" value={charge.discount} onChange={handleDiscount} />

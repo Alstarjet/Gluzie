@@ -1,0 +1,57 @@
+.CostResum{
+    background-color:rgb(193, 216, 191);
+    display: flex;
+    flex-direction: column;
+    padding: 0.7rem;
+    margin: 0 0 1rem 0;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius:  1rem;
+}
+.CostResum label{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.NewChargeComponent button{
+    background-color:rgb(14, 107, 110);
+    color: white;
+}
+.CatalogSearch{
+    background-color: rgba(144, 215, 233, 0.486);
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius:  1rem;
+    color: black;
+    padding: 0.5rem 0.5rem;
+    margin-bottom: 0.7rem;
+
+}
+.CatalogSearch button{
+    background-color:rgb(12, 168, 173);
+    padding: 0.3rem 1rem;
+}
+.TableResumeCharge button{
+    background-color: brown;
+    padding: 0.3rem 1rem;
+}
+.TableResumeCharge{
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(182, 245, 176);
+    padding: 0.5rem 0.5rem 0 0.5rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius:  1rem;
+}
+.TableResumeCharge tr{
+    display: grid;  
+grid-template-columns:12% 30% 12% 18% 25% ;
+    border-bottom: 1px dashed rgb(27, 99, 20);
+    padding: 0.2rem 0;
+}
+.SelectTypeCharge{
+    display: flex;
+    justify-content: space-around;
+    border-top-left-radius: 1rem;
+    border-top-right-radius:  1rem;
+    background-color: rgba(144, 215, 233, 0.486);
+}

@@ -56,7 +56,7 @@ function ProductoCustom({ Products, AddProduct }: productCustomProps) {
     }
 
     return (
-        <div className='nuevoProducto'>
+        <div className='CatalogSearch'>
             <label>
                 Nombre:
                 <input type="text" name="name" value={product.name} onChange={handleChange} />

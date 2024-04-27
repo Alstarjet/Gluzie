@@ -64,12 +64,14 @@ function ClientCharge() {
 
     return (
         <div className='ClearForm'>
-            <button onClick={goBack}>Atras</button>
-            <h2>Nuevo Cargo</h2>
+            <div className='HeadFormsBack'>
+                <button onClick={goBack}>Atras</button>
+                <h2>Nuevo Cargo</h2>
+            </div>
             {(client != undefined && client.uuid.length > 3) ? <div >
-                Cliente: {client.name} {client.lastname}
+                <h4>Cliente: {client.name} {client.lastname}</h4>
                 <NewCharge client={client} charge={charge} setCharge={setCharge} />
-                <button onClick={saveCharge}>Guardar Cargo</button>
+                <button onClick={saveCharge} className='saveButton'>Guardar Cargo</button>
             </div> : <div>ERRROR</div>}
         </div>
     )

@@ -41,7 +41,7 @@ function ClientProfile() {
 
     return (
         <div key={client.uuid} className='pageUse'>
-            <div className='flexdist'>
+            <div className='headClient'>
                 <button onClick={() => setContext('edit')} className='minButton2 buttonBlue'>Ediar</button>
                 <h2>{client.name} {client.lastname}</h2>
             </div>

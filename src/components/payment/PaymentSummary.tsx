@@ -7,9 +7,8 @@ interface Payment {
 function PaymentSummary({ Payment }: Payment) {
     return (
         <div className='IteamSummary PaymentIteam'>
-            <h4>Pago</h4>
+            <h4>Pago por la Cantidad: ${Payment.amount}</h4>
             <div>{formatDate(Payment.createat)}</div>
-            <div>Cantidad:${Payment.amount}</div>
         </div>
     )
 }

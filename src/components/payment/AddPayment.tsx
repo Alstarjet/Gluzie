@@ -79,7 +79,7 @@ function AddPayment({DataClient}:ClientComponents) {
                         <input type="text" name="concept" value={payment.concept} onChange={handleChange} />
                     </label>
                     <br />
-                    <button className="grandButton buttonGreen" onClick={handleNewPayment}>Guardar Pago</button>
+                    <button className="saveButton" onClick={handleNewPayment}>Guardar Pago</button>
                 
             
         </div>

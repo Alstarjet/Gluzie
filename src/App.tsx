@@ -36,19 +36,9 @@ import './css/data.css'
 
 
 import { openDatabase } from './database/indexedDBConect'
-import { useState } from "react";
 
 function App() {
-  const[count,setCout]=useState<number>(0)
-  function Conejo(){
-    if (count==5){
-      
-      setTimeout(()=>{
-        window.location.pathname = "/info"
-      },500)
-    }
-    setCout(0)
-  }
+
   openDatabase()
   return (
     <BrowserRouter >
@@ -74,9 +64,9 @@ function App() {
       <nav id="NavBar">
 
         <Link to="/" className="ToLink">Pedidos</Link>
-        <Link to="/dataexplore" className="ToLink" onClick={()=>{Conejo()}}>Data</Link>
+        <Link to="/dataexplore" className="ToLink" >Data</Link>
         <Link to="/clients" className="ToLink">Clientes</Link>
-        <Link to="/product" className="ToLink" onClick={()=>{setCout(count+1)}}>Productos</Link>
+        <Link to="/product" className="ToLink" >Productos</Link>
       </nav>
     </BrowserRouter>
   )

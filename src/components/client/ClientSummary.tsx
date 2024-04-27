@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,Fragment } from 'react';
 import { paymentsDB } from "../../database/paymentsDBController";
 import { chargesDB } from "../../database/chargesDBController";
 import ChargeSummary from '../charge/ChargeSummary'
@@ -7,7 +7,7 @@ import PaymentSummary from '../payment/PaymentSummary'
 import type { client } from '../../interfaces/client'
 import type { charge } from '../../interfaces/catalog'
 import type { payment } from '../../interfaces/payment'
-
+import './ClientSummary.css'
 
 
 interface ClientItemProps {
@@ -70,18 +70,18 @@ function ClientSummary({ DataClient }: ClientItemProps) {
 
     return (
         <div className='pageUse'>
-            <h3>Total de deuda: {debt}</h3>
+            <h3>Total de deuda: ${debt}</h3>
             <div className='tableSummary'>
                 {showinfo.map((item, index) => (
-                    <div key={index}>
-                        {item.type === "charge" && item.charge ? (
+                <Fragment key={index}>
+                {item.type === "charge" && item.charge ? (
                             <ChargeSummary Charge={item.charge} />
                         ) : (
                             item.type === "payment" && item.payment ? (
                                 <PaymentSummary Payment={item.payment} />
                             ) : null
                         )}
-                    </div>
+                    </Fragment>
                 ))}
             </div>
         </div>

@@ -53,9 +53,11 @@ function NewOrder() {
         window.history.back();
     };
     return (
-        <div className='viewFull ClearForm'>
+        <div className='ClearForm'>
+            <div className='HeadFormsBack'>
             <button onClick={goBack}>Atras</button>
             <h2>Nuevo Pedido</h2>
+            </div>
             {(client === undefined) && <div >
                 <ClientSearch Select={setClient} />
             </div>}
@@ -64,7 +66,7 @@ function NewOrder() {
                 <button onClick={() => { setClient(undefined) }}> Cambiar</button>
             </div>}
             <NewCharge client={client} charge={charge} setCharge={setCharge} />
-            <button onClick={saveCharge}>Guardar Pedido</button>
+            <button onClick={saveCharge} className='saveButton'>Guardar Pedido</button>
         </div>
     )
 }
