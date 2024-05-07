@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { paymentsDB } from "../../database/paymentsDBController";
 import type { client } from '../../interfaces/client'
 import type { payment } from '../../interfaces/payment'
-
+import './payment.css'
 
 interface ClientComponents {
     DataClient:client,
@@ -38,25 +38,29 @@ function AddPayment({DataClient}:ClientComponents) {
             alert("Necesitas Agregar una cantida");
             return
         }
-        if (newPayment.concept == "") {
-            newPayment.concept="Pago de deuda"
+        const response = window.confirm("¿Quieres guardar el pago por $"+newPayment.amount+"?")
+        if (response) {
+            if (newPayment.concept == "") {
+                newPayment.concept="Pago de deuda"
+            }
+            paymentsDB.addPayment(payment)
+            setPayment({
+                clientuuid: DataClient.uuid,
+                clientname: DataClient.name+" "+DataClient.lastname,
+                uuid: uuidv4(),
+                amount: 0,
+                method: 'Efectivo',
+                concept: '',
+                createat: new Date(),
+                updateat:new Date(),
+                cloud:0,
+                status:"active"
+            })
         }
-        paymentsDB.addPayment(payment)
-        setPayment({
-            clientuuid: DataClient.uuid,
-            clientname: DataClient.name+" "+DataClient.lastname,
-            uuid: uuidv4(),
-            amount: 0,
-            method: 'Efectivo',
-            concept: '',
-            createat: new Date(),
-            updateat:new Date(),
-            cloud:0,
-            status:"active"
-        })
+        
       };
     return (
-        <div key={DataClient.uuid} className='viewFull'>
+        <div key={DataClient.uuid} className='paymentView'>
             
                 <h2>Nuevo Pago</h2>
                 

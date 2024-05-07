@@ -21,7 +21,7 @@ import NewOrder from './pages/orders/NewOrder'
 import EditOrder from './pages/orders/EditOrder'
 import CatalogRegister from './pages/products/CatalogRegister'
 
-
+import asyncBack from './scripts/asyncBack'
 
 
 import './App.css'
@@ -36,8 +36,11 @@ import './css/data.css'
 
 
 import { openDatabase } from './database/indexedDBConect'
+import { useEffect } from "react";
 
 function App() {
+
+  useEffect(()=>asyncBack,[])
 
   openDatabase()
   return (
