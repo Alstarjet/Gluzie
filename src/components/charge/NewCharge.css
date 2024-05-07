@@ -55,3 +55,11 @@ grid-template-columns:12% 30% 12% 18% 25% ;
     border-top-right-radius:  1rem;
     background-color: rgba(144, 215, 233, 0.486);
 }
+
+.ChargeCard{
+    margin-top: 1rem;
+    border-color:rgba(255, 153, 94, 0.849);
+    border-width: 0.3rem;
+    border-style:solid;
+    border-radius: 1rem;
+}

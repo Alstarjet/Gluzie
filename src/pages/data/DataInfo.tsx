@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Login from '../../backend/login'
-import { postData } from '../../backend/postData'
+//import { postData } from '../../backend/postData'
 import {getData} from '../../backend/getData'
 
 
@@ -39,12 +39,12 @@ function DataInfo() {
             alert("Email o Contraseña Incorrectos")
         }
     };
-    async function PostData() {
+    /*async function PostData() {
         let a = await postData()
         if (!a) {
             setStatus("login")
         }
-    }
+    }*/
     async function GetData() {
         let a = await getData()
         if (!a) {
@@ -78,7 +78,6 @@ function DataInfo() {
             </form>}
             {status == "menue" && <div>
                 <h2>Hola {name}</h2>
-                <button onClick={PostData}>Respaldar Datos</button>
                 <button onClick={GetData}>Optener Datos</button>
             </div>}
 

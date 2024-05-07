@@ -1,0 +1,8 @@
+.paymentView{
+    background-color: aquamarine;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1.5rem;
+}
