@@ -40,7 +40,7 @@ import { useEffect } from "react";
 
 function App() {
 
-  useEffect(()=>asyncBack,[])
+  useEffect(()=>{asyncBack()},[])
 
   openDatabase()
   return (
