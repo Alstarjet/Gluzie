@@ -2,7 +2,7 @@ import { ConsutDataOffCloud, UpdateOffCloud } from '../database/advanced/dataOff
 import { postNewData } from '../backend/apiSync'
 function asyncBack() {
     syncFunc()
-    setInterval(syncFunc, 40000)
+    setInterval(syncFunc, 10000)
 }
 
 async function syncFunc() {
@@ -19,7 +19,7 @@ async function syncFunc() {
     const currentDate = new Date
     const difMS: number = Math.abs(currentDate.getTime() - LastDate.getTime());
     console.log("diferencia de tiempo" + difMS)
-    if (difMS > 3600000) {
+    if (difMS > 30000) {
         console.log("hora de sincronizar")
         try {
             const LocalData = await ConsutDataOffCloud()

@@ -79,6 +79,7 @@ function DataInfo() {
             {status == "menue" && <div>
                 <h2>Hola {name}</h2>
                 <button onClick={GetData}>Optener Datos</button>
+                <p>Clave de dispositivo:{localStorage.getItem('Device')}</p>
             </div>}
 
         </div>
