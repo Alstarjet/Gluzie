@@ -121,7 +121,7 @@ async function GetEditPayment(PaymentObjs:payment) {
     const store = transaction.objectStore("payments");
 
 
-    PaymentObjs.cloud = 0;
+    PaymentObjs.cloud = 1;
     const updateRequest = store.put(PaymentObjs);
     updateRequest.onsuccess = function () {
         console.log(`Los datos con ID ${PaymentObjs} se actualizaron con éxito`);

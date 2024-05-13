@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
 import { productsDB } from "../../database/productsDBController";
-import type { productInventoryItem} from '../../interfaces/catalog'
+import type { productInventoryItem } from '../../interfaces/catalog'
 import type { productPropsAddOnly } from './interfaceProduct'
+import type { productCartItem } from '../../interfaces/catalog';
 
-function ProductSearch({AddProduct}:productPropsAddOnly) {
+function ProductSearch({ AddProduct }: productPropsAddOnly) {
     const [name, setName] = useState('')
     const [ProductFilter, setArray] = useState<productInventoryItem[]>([])
     const [stoneListProducts, setProducts] = useState<productInventoryItem[]>([])
 
-    const handleSearch = (event:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setArray([])
         const { value } = event.target;
         setName(value);
@@ -29,27 +30,33 @@ function ProductSearch({AddProduct}:productPropsAddOnly) {
     }
     const loadProducts = async () => {
         try {
-          let ProductDB = await productsDB.readProducts();
-          setProducts(ProductDB)
+            let ProductDB = await productsDB.readProducts();
+            setProducts(ProductDB)
         } catch (error) {
-          console.error("Error al cargar Productos desde la base de datos: ", error);
+            console.error("Error al cargar Productos desde la base de datos: ", error);
         }
-      };
-    
-      useEffect(() => {
+    };
+
+    useEffect(() => {
         loadProducts();
-      }, []);
+    }, []);
+    const AddProductAndClear = (product: productCartItem) => {
+        AddProduct(product)
+        setName("")
+        setArray([])
+
+    }
 
     return (
-        
-            <div className='CatalogSearch'>
-                <input type="text" id="buscador" value={name} placeholder="Buscar Producto..." onChange={handleSearch} className='searchProduct' autoComplete ="off"/>
-                <table className='itemaSearchProduct'>
-                    {ProductFilter.map(item => (
-                        <ProductItem Product={item} AddProduct={AddProduct} />
-                    ))}</table>
-            </div>
-        
+
+        <div className='CatalogSearch'>
+            <input type="text" id="buscador" value={name} placeholder="Buscar Producto..." onChange={handleSearch} className='searchProduct' autoComplete="off" />
+            <table className='itemaSearchProduct'>
+                {ProductFilter.map(item => (
+                    <ProductItem Product={item} AddProduct={AddProductAndClear} />
+                ))}</table>
+        </div>
+
     )
 }
 export default ProductSearch;

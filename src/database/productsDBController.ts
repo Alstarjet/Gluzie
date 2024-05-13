@@ -147,7 +147,7 @@ async function GetEditProduct(ProductObjs:productInventoryItem) {
     const transaction = db.transaction(keysDB.products.Store, "readwrite");
     const store = transaction.objectStore(keysDB.products.Store);
 
-    ProductObjs.cloud=0
+    ProductObjs.cloud=1
     const updateRequest = store.put(ProductObjs);
     updateRequest.onsuccess = function () {
         console.log(`Los datos con ID ${ProductObjs} se actualizaron con éxito`);

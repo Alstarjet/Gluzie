@@ -23,6 +23,7 @@ async function getData(): Promise<boolean> {
         });
         if (response.status >= 200 && response.status <= 299) {
             const data: GetData = await response.json();
+            console.log(data)
             saveDataOfCloud(data)
             const delet = await deteleIdsCloud()
             if (!delet) {
@@ -88,6 +89,7 @@ async function saveDataOfCloud(data: GetData) {
         })
     }
     if (data.payments != null) {
+        console.log(data.payments)
         data.payments.forEach((iteam) => {
             iteam.createat = new Date(iteam.createat)
             iteam.updateat = new Date(iteam.updateat)
