@@ -1,12 +1,18 @@
 import { ConsutDataOffCloud, UpdateOffCloud } from '../database/advanced/dataOffCloud'
 import { postNewData } from '../backend/apiSync'
+const ENVIRONMENT = import.meta.env.VITE_ENVIRONMENT
+
 function asyncBack() {
     syncFunc()
-    setInterval(syncFunc, 10000)
+    if (ENVIRONMENT == "local") {
+        setInterval(syncFunc, 10000)
+    } else {
+        setInterval(syncFunc, 40000)
+    }
 }
 
 async function syncFunc() {
-    
+    const timeToUp = (ENVIRONMENT == "local") ? 30000 : 3600000
     let BackDate = localStorage.getItem('BackDate')
     let LastDate: Date
     if (BackDate == null || BackDate == "") {
@@ -19,7 +25,7 @@ async function syncFunc() {
     const currentDate = new Date
     const difMS: number = Math.abs(currentDate.getTime() - LastDate.getTime());
     console.log("diferencia de tiempo" + difMS)
-    if (difMS > 30000) {
+    if (difMS > timeToUp) {
         console.log("hora de sincronizar")
         try {
             const LocalData = await ConsutDataOffCloud()
@@ -31,10 +37,10 @@ async function syncFunc() {
             if (status > 199 && status < 300) {
                 UpdateOffCloud(LocalData.data)
                 localStorage.setItem('BackDate', currentDate.toString())
-            }else if(status >= 400 && status<=499){
+            } else if (status >= 400 && status <= 499) {
                 alert("Para mantener el respaldo automatico inicia secion nuevamente")
                 localStorage.setItem('Token', "");
-            }else{
+            } else {
                 console.log("error al enviar la info")
             }
 
