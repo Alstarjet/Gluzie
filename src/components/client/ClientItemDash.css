@@ -1,0 +1,59 @@
+.cardClientDash {
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    border-radius: 1rem;
+}
+
+.cardClientDash>div {
+    display: flex;
+    justify-content: space-between;
+    margin:  0.2rem 0.8rem 0.4rem 0.8rem ;
+}
+
+.cardClientDash h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1rem;
+}
+
+.cardClientDash h4 {
+    margin: 0;
+    color: var(--text-dark-second);
+    line-height: 1.1rem;
+}
+
+.cardClientDash p {
+    margin: 0;
+}
+
+.cardClientDash .leftElementDash {
+    text-align: right;
+    max-width: 50%;
+}
+
+.cardClientDash .leftElementDash p {
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.statusClientDash {
+    background-color: rgba(255, 255, 255, 0.541);
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 0.1rem 0.4rem 0 0.4rem;
+    margin-left: 0.3rem;
+}
+
+.statusClientDash div>p {
+    text-align: right;
+    margin: 0 0.1rem;
+
+}
+
+.cardClientDash button {
+    padding: 0.6rem 0.7rem
+}

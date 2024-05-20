@@ -1,7 +1,25 @@
 body{
-    background-color: #F0F0F0;
+    background-color: var(--bg-main-color)
 }
 .cardClear{
     background-color: #E5D283;
     border-radius: 0.5rem;
+}
+.cardColorOne{
+    background-color: var(--card-first-color);
+    color: var(--text-first-color);
+}
+.cardColorTwo{
+    background-color: var(--card-second-color);
+    color: var(--text-first-color);
+}
+.cardColorOne button{
+    background-color: var(--bg-main-color);
+    color: var(--text-first-color);
+    box-shadow: 0px 4px 13px -3px rgba(0,0,0,1);
+}
+.cardColorTwo button{
+    background-color: var(--bg-main-color);
+    color: var(--text-first-color);
+    box-shadow: 0px 4px 13px -3px rgba(0,0,0,1);
 }

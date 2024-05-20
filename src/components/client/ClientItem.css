@@ -1,0 +1,23 @@
+.clientItemDash .clientDisplay{
+    display: flex;
+    justify-content: space-between;
+}
+.clientDisplay p{
+    margin: 0;
+    line-height: 1rem;
+    font-size: 1rem;
+}
+.clientItemDash h3{
+    margin: 0;
+    font-size: 1rem;
+}
+.clientItemDash{
+    padding: 0.3rem;
+    background-color: #ffc02171;
+    margin-bottom: 0.2rem;
+}
+.clientItemDash button{
+    background-color: var(--card-second-color);
+    color: var(--bg-main-color);
+    padding: 0.6rem 0.7rem;
+}
