@@ -1,7 +1,6 @@
 .seachAndAdd{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1rem;
     margin-top: 1rem;
 }
 .seachAndAdd input{
@@ -23,4 +22,11 @@
 .TwoButtonFlex{
     display: flex;
     justify-content: space-between;
+}
+
+.flexSB{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

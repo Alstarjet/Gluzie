@@ -11,6 +11,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --bg-main-color:#F7F8FF;
+  --card-first-color:#ffbf21;
+  --card-second-color:#00B1F3;
+  --text-first-color:#09090a;
+  --text-dark-second:#41414b;
 }
 
 a {

@@ -5,7 +5,6 @@ import {
   Link,
 } from "react-router-dom";
 import ClientRegister from './pages/clients/ClientRegister'
-import ClientSearch from './pages/clients/ClientsSearch'
 import ClientProfile from './pages/clients/ClientProfile'
 import ClientCharge from './pages/clients/ClientCharge'
 import ProductMenu from './pages/products/ProductMenu'
@@ -20,6 +19,7 @@ import OrderSearch from './pages/orders/OrderSearch'
 import NewOrder from './pages/orders/NewOrder'
 import EditOrder from './pages/orders/EditOrder'
 import CatalogRegister from './pages/products/CatalogRegister'
+import ClientDashboard from "./pages/clients/ClientDashboard";
 
 import asyncBack from './scripts/asyncBack'
 
@@ -29,7 +29,7 @@ import './css/nav.css'
 import './css/colors.css'
 import './css/form.css'
 import './css/clients.css'
-import './css/simpleflex.css'
+import './css/simpleDisplay.css'
 import './css/data.css'
 
 
@@ -55,13 +55,14 @@ function App() {
         <Route path="/productregister" element={<ProductRegister />} />
         <Route path="/product/search/:catalog" element={<ProductSearch />} />
         <Route path="/product/:productId" element={<ProductEdit />} />
-        <Route path="/clients" element={<ClientSearch />} />
+        <Route path="/clients" element={<ClientDashboard />} />
         <Route path="/clients/profile/:clientId" element={<ClientProfile />} />
         <Route path="/clients/newcharge/:clientId" element={<ClientCharge />} />
         <Route path="/productExcelUP" element={<ProductExcel />} />
         <Route path="/clientExcelUP" element={<ClientExcel />} />
         <Route path="/catalogregister" element={<CatalogRegister />} />
         <Route path="/info" element={<DataInfo />} />
+        <Route path="/clientsDashboard" element={<ClientDashboard />} />
 
       </Routes>
       <nav id="NavBar">
