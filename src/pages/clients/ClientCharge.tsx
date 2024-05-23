@@ -70,7 +70,7 @@ function ClientCharge() {
             </div>
             {(client != undefined && client.uuid.length > 3) ? <div className='ChargeCard'>
                 <h4>Cliente: {client.name} {client.lastname}</h4>
-                <NewCharge client={client} charge={charge} setCharge={setCharge} />
+                <NewCharge charge={charge} setCharge={setCharge} />
                 <button onClick={saveCharge} className='saveButton'>Guardar Cargo</button>
             </div> : <div>ERRROR</div>}
         </div>

@@ -36,6 +36,7 @@ function ProductoCustom({ Products, AddProduct }: productCustomProps) {
     const handleSubmit = () => {
         let NewProduct = product
         NewProduct.key = "X" + (+Math.floor(Math.random() * 899) + 100) + Products.length
+        NewProduct.uuid=NewProduct.key
         if (NewProduct.name == "" || NewProduct.price == 0 || isNaN(NewProduct.price)) {
             alert("Precio o Nombre no valido");
             return

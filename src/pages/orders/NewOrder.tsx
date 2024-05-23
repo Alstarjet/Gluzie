@@ -65,7 +65,7 @@ function NewOrder() {
                 Pedido de: {client.name} {client.lastname}
                 <button onClick={() => { setClient(undefined) }}> Cambiar</button>
             </div>}
-            <NewCharge client={client} charge={charge} setCharge={setCharge} />
+            <NewCharge charge={charge} setCharge={setCharge} />
             <button onClick={saveCharge} className='saveButton'>Guardar Pedido</button>
         </div>
     )

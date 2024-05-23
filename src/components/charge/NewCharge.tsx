@@ -3,21 +3,21 @@ import ProductSearch from "../product/ProductSearch"
 import ProductoPreCharge from "../product/ProductoPreCharge"
 import ProductoCustom from "../product/ProductoCustom"
 import type { charge, productCartItem } from '../../interfaces/catalog'
-import { client } from '../../interfaces/client';
 
 import './NewCharge.css'
 
 interface ClientComponents {
-    client: client | undefined;
     setCharge: React.Dispatch<React.SetStateAction<charge>>,
     charge: charge
 }
 
-function NewCharge({ client, charge, setCharge }: ClientComponents) {
+function NewCharge({ charge, setCharge }: ClientComponents) {
     const [sourceProd, setSourceProd] = useState("catalog")
-
+    const [statusArray,setStatusArray]=useState("newproduct")
     const AddProduct = (product: productCartItem) => {
         // Verificar si el producto ya existe en la lista
+        setStatusArray("newproduct")
+        console.log(product)
         const existingProductIndex = charge.products.findIndex(p => p.uuid == product.uuid);
         if (existingProductIndex !== -1) {
             const updatedProducts = [...charge.products];
@@ -35,6 +35,7 @@ function NewCharge({ client, charge, setCharge }: ClientComponents) {
         }
     };
     const DeleteProduct = (key: string) => {
+        setStatusArray("deleteproduct")
         // Filtrar la lista para excluir el producto con la key proporcionada
         const updatedProducts = charge.products.filter(product => product.key !== key);
         // Actualizar el estado con la nueva lista
@@ -85,7 +86,6 @@ function NewCharge({ client, charge, setCharge }: ClientComponents) {
         }));
     }
 
-    console.log(client)
     useEffect(() => {
         // Suma de los totales de los productos
         const totalSum = charge.products.reduce((acc, product) => acc + product.total, 0);
@@ -109,7 +109,7 @@ function NewCharge({ client, charge, setCharge }: ClientComponents) {
             ) : (
                 <ProductoCustom Products={charge.products} AddProduct={AddProduct}></ProductoCustom>
             )}
-            {charge.products.length > 0 && <ProductoPreCharge Products={charge.products} Delete={DeleteProduct} Update={UpdateProduct}></ProductoPreCharge>}
+            {charge.products.length > 0 && <ProductoPreCharge Products={charge.products} Delete={DeleteProduct} Update={UpdateProduct} Status={statusArray}></ProductoPreCharge>}
 
             <div className='CostResum'>
                 <label>
