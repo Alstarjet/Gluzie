@@ -42,7 +42,7 @@ function OrderSearch({ }) {
   return (
     <div>
       <div className='seachAndAdd'>
-      <input type="text" id="buscador" value={name} placeholder="Buscar Ordere..." onChange={handleChange} className='searchOrder' />
+      <input type="text" id="buscador" value={name} placeholder="Buscar Pedido por cliente..." onChange={handleChange} className='searchOrder' />
       <Link to="/neworder" className="ToLink"><RiAddCircleFill className='IcoAdd'/><p>Nuevo</p></Link>
       </div>
       {ArrayOrdersFilter.map(item => (

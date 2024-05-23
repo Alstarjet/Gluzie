@@ -110,7 +110,7 @@ function EditOrder() {
                 Pedido de: {client.name} {client.lastname}
                 <button onClick={() => { setClient(undefined) }}> Cambiar</button>
             </div>}
-            <NewCharge client={client} charge={charge} setCharge={setCharge} />
+            <NewCharge charge={charge} setCharge={setCharge} />
             <div className='TwoButtonFlex'>
                 <button onClick={credited} className='saveButton'>Convertir a Cargo</button>
                 <button onClick={saveCharge} className='saveButton'>Guardar Cambios</button>

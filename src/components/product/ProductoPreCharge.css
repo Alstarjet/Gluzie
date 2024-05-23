@@ -1,0 +1,13 @@
+.newproduct tr:first-child {
+    animation: appearAndSlide 1s ease forwards;
+}
+
+
+@keyframes appearAndSlide {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
