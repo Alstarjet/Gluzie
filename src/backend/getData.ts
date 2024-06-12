@@ -1,16 +1,13 @@
 import { chargesDB } from "../database/chargesDBController";
 import { clientsDB } from "../database/clientsDBController";
-import { productsDB } from "../database/productsDBController";
 import { paymentsDB } from "../database/paymentsDBController";
 import { ordersDB } from "../database/ordersDBController";
-import { catalogsDB } from "../database/catalogsDBController";
-import { v4 as uuidv4 } from 'uuid';
 
 import type { GetData } from '../interfaces/API'
-import { catalog } from "../interfaces/catalog";
+
 const URL_BACK = import.meta.env.VITE_URL_BACK
 
-async function getData(): Promise<boolean> {
+async function getData(): Promise<number> {
     try {
         let Token = localStorage.getItem('Token')
         let device = localStorage.getItem('Device')
@@ -28,20 +25,20 @@ async function getData(): Promise<boolean> {
             const delet = await deteleIdsCloud()
             if (!delet) {
                 alert("Datos descargados con exito parcial")
-                return true
+                return response.status
             }
             alert("Datos descargados con exito")
-            return true
+            return response.status
         } else if (response.status >= 400 && response.status <= 499) {
             alert("la sesión caduco, inicia secion optener los datos")
             localStorage.setItem('Token', "");
-            return false
+            return response.status
         }
-        return true
+        return response.status
     } catch (error) {
         alert("Hubo un problema con la descarga")
         console.error('Error En la descarga de archivos:', error);
-        return false
+        return 500
     }
 }
 async function deteleIdsCloud(): Promise<boolean> {
@@ -96,44 +93,6 @@ async function saveDataOfCloud(data: GetData) {
             paymentsDB.GetEditPayment(iteam)
         })
     }
-    if (data.products != null) {
-        let catalogs: catalog[] = await catalogsDB.readCatalogs()
-        let newCatalogs: catalog[] = []
-        data.products.forEach((iteam) => {
-            let exist: boolean = false
-            for (let c of catalogs) {
-                if (c.name == iteam.catalog) {
-                    exist = true
-                }
-            }
-            console.log(iteam)
-            if (!exist && iteam.catalog != "Default") {
-                let exist: boolean = false
-                for (let c of newCatalogs) {
-                    if (c.name == iteam.catalog) {
-                        exist = true
-                    }
-                }
-                if (!exist) {
-                    const newCatalog: catalog = {
-                        key: uuidv4(),
-                        name: iteam.catalog,
-                        status: "active"
-                    }
-                    newCatalogs.push(newCatalog)
-                }
-            }
-            iteam.createat = new Date(iteam.createat)
-            iteam.updateat = new Date(iteam.updateat)
-            iteam.cloud = 1
-            productsDB.GetEditProduct(iteam)
-        })
-        newCatalogs.forEach((iteam) => {
-            catalogsDB.addCatalog(iteam)
-
-        })
-    }
-
 
 
 }

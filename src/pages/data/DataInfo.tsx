@@ -30,21 +30,16 @@ function DataInfo() {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        const response = await Login(email, password)
-        if (response.ok) {
+        const response = await Login(email, password,"/login")
+        if (response>200) {
             setStatus('menue')
-            setName(response.hello)
+            setName("Error")
         } else {
             setStatus('login')
             alert("Email o Contraseña Incorrectos")
         }
     };
-    /*async function PostData() {
-        let a = await postData()
-        if (!a) {
-            setStatus("login")
-        }
-    }*/
+
     async function GetData() {
         let a = await getData()
         if (!a) {

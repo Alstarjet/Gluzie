@@ -1,18 +1,67 @@
 import { PiMicrosoftExcelLogoFill } from "react-icons/pi";
 import { Link, } from "react-router-dom";
-import { IoIosPeople } from "react-icons/io";
 import { LuBoxes } from "react-icons/lu";
-import { RiLoginBoxFill } from "react-icons/ri";
-
-
+import { IoSyncCircle } from "react-icons/io5";
+import { getData } from '../../backend/getData'
+import { useNavigate } from 'react-router-dom';
+import CryptoStorage from "../../localstorage/mangerstorage";
+import { useEffect, useState } from "react";
+import LogOff from "../../backend/logOff";
+import { InitBackDirect } from "../../scripts/asyncBack";
+import getNewJWT from "../../backend/getJWT";
 function DataExplore() {
+  const navigate = useNavigate();
+  const [typeC, setTypeC] = useState<string>("Hol");
+
+  useEffect(() => {
+    let client = CryptoStorage.consultTypeclient();
+    console.log('Client:', client, "hola"); // Verifica el valor de client
+    setTypeC(client);
+  }, []);
+
+  useEffect(() => {
+    console.log('Updated typeC:', typeC); // Verifica cuando typeC cambia
+  }, [typeC]);
+
+  async function GetData() {
+    const status = await getData();
+    if (status >= 400 && status <= 499) {
+      navigate('/login');
+    }
+  }
+  async function LogOffs() {
+    let status = await getNewJWT()
+    if (status > 300) {
+      alert("Problemas al Cerrar Sesión, posibles datos faltantes de respaldar, intentalo mas tarde")
+      navigate('/login');
+    }
+    status = await InitBackDirect()
+    if (status >= 200 && status <= 299) {
+      status = await LogOff();
+      if (status >= 200 && status <= 299) {
+        localStorage.setItem('Token', '')
+        navigate('/login');
+      } else if (status >= 400 && status <= 499) {
+        localStorage.setItem('Token', '')
+        navigate('/login');
+      } else {
+        alert("Error al Cerrar Sesión, pero todos los datos han sido respaldados")
+      }
+    } else {
+      alert("Problemas al Cerrar Sesión, posibles datos faltantes de respaldar, intentalo mas tarde")
+    }
+
+  }
 
   return (
     <div className='Databoard'>
-      <h2><PiMicrosoftExcelLogoFill />Menu de Datos</h2>
-      <Link to="/clientExcelUP"><button className='grandButton buttonBlue'><IoIosPeople />Cargar Clientes</button></Link>
-      <Link to="/productExcelUP"><button className='grandButton buttonBlue'><LuBoxes />Cargar Productos</button></Link>
-      <Link to="/info"><button className='grandButton buttonBlue'><RiLoginBoxFill />Iniciar Sesión</button></Link>
+      <h2><PiMicrosoftExcelLogoFill /> Menu de Datos</h2>
+      <Link to="/productExcelUP"><button className='grandButton buttonBlue'><LuBoxes /> Cargar Productos</button></Link>
+      {(typeC == 'Amethyst') && (
+        <button onClick={GetData} className='grandButton buttonBlue'><IoSyncCircle /> Sincronizar Datos</button>
+      )}
+      <button onClick={LogOffs} className='grandButton buttonBlue'><IoSyncCircle /> Cerrar Sección</button>
+
     </div>
   );
 }

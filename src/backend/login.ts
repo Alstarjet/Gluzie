@@ -1,54 +1,50 @@
-import {saveDataOfCloud} from './getData'
-import type {GetData} from '../interfaces/API'
-interface LoginResponse{
-    token:string
-    hello:string
-    data:GetData
-    newdevice:boolean
+import { saveDataOfCloud } from './getData'
+import type { GetData } from '../interfaces/API'
+import CryptoStorage from '../localstorage/mangerstorage'
+interface LoginResponse {
+    token: string
+    expires: Date
+    username: string
+    data: GetData
+    typeclient:string
 }
-interface LoginReturn{
-    ok:boolean
-    hello:string
-}
+
 import { v4 as uuidv4 } from 'uuid';
 
 const URL_BACK = import.meta.env.VITE_URL_BACK
 
-async function Login(email:string, password:string):Promise<LoginReturn> {
-    let ret:LoginReturn={
-        ok:true,
-        hello:"Error"
-    }
+async function Login(email: string, password: string,path :string): Promise<number> {
     try {
-        let device = localStorage.getItem('Device')
-        if (device==null||device.length<3){
-            device=uuidv4()
-            localStorage.setItem('Device', device);
+        let device = CryptoStorage.consultDeviceID()
+        if (device == null || device.length < 3) {
+            device = uuidv4()
+            CryptoStorage.saveDeviceID(device)
         }
 
-        const response = await fetch(URL_BACK+"/login", {
+
+        const response = await fetch(URL_BACK + path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password,device })
+            body: JSON.stringify({ email, password, device })
         });
-        if (!response.ok) {
-            throw new Error('Credenciales inválidas');
+        if (response.status!=200){
+            return response.status
         }
+        const data: LoginResponse = await response.json();
+ 
+        saveDataOfCloud(data.data)
 
-        const data:LoginResponse = await response.json();
-        if (data.newdevice){
-            saveDataOfCloud(data.data)
-        }
-        localStorage.setItem('Token', data.token);
-        localStorage.setItem('Hello', data.hello);
-        ret.hello=data.hello
-        return ret
+        localStorage.setItem('Token', data.token)
+        localStorage.setItem('TokenExpires', data.expires.toString())
+        localStorage.setItem('UserName', data.username)
+        CryptoStorage.saveTypeclient(data.typeclient)
+
+        return response.status
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
-        ret.ok=false
-        return ret
+        return 500
     }
 }
 export default Login

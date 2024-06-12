@@ -20,10 +20,11 @@ import NewOrder from './pages/orders/NewOrder'
 import EditOrder from './pages/orders/EditOrder'
 import CatalogRegister from './pages/products/CatalogRegister'
 import ClientDashboard from "./pages/clients/ClientDashboard";
-
-import asyncBack from './scripts/asyncBack'
-
-
+import LoginPage from "./pages/data/Login";
+import {asyncBack} from './scripts/asyncBack'
+import ProtectedRoute from "./components/utilities/ProtectedRoute";
+import ProtectedLogin from "./components/utilities/ProtectedLogin";
+import RegisterUser from "./pages/data/RegisterUser";
 import './App.css'
 import './css/nav.css'
 import './css/colors.css'
@@ -40,29 +41,31 @@ import { useEffect } from "react";
 
 function App() {
 
-  useEffect(()=>{asyncBack()},[])
+  useEffect(() => { asyncBack() }, [])
 
   openDatabase()
   return (
     <BrowserRouter >
       <Routes>
-        <Route path="/" element={<OrderSearch />} />
-        <Route path="/neworder" element={<NewOrder />} />
-        <Route path="/order/:orderId" element={<EditOrder />} />
-        <Route path="/dataexplore" element={<DataExplore />} />
-        <Route path="/clientregister" element={<ClientRegister />} />
-        <Route path="/product" element={<ProductMenu />} />
-        <Route path="/productregister" element={<ProductRegister />} />
-        <Route path="/product/search/:catalog" element={<ProductSearch />} />
-        <Route path="/product/:productId" element={<ProductEdit />} />
-        <Route path="/clients" element={<ClientDashboard />} />
-        <Route path="/clients/profile/:clientId" element={<ClientProfile />} />
-        <Route path="/clients/newcharge/:clientId" element={<ClientCharge />} />
-        <Route path="/productExcelUP" element={<ProductExcel />} />
-        <Route path="/clientExcelUP" element={<ClientExcel />} />
-        <Route path="/catalogregister" element={<CatalogRegister />} />
-        <Route path="/info" element={<DataInfo />} />
-        <Route path="/clientsDashboard" element={<ClientDashboard />} />
+        <Route path="/" element={<ProtectedRoute><OrderSearch /></ProtectedRoute>} />
+        <Route path="/neworder" element={<ProtectedRoute><NewOrder /></ProtectedRoute>} />
+        <Route path="/order/:orderId" element={<ProtectedRoute><EditOrder /></ProtectedRoute>} />
+        <Route path="/dataexplore" element={<ProtectedRoute><DataExplore /></ProtectedRoute>} />
+        <Route path="/clientregister" element={<ProtectedRoute><ClientRegister /></ProtectedRoute>} />
+        <Route path="/product" element={<ProtectedRoute><ProductMenu /></ProtectedRoute>} />
+        <Route path="/productregister" element={<ProtectedRoute><ProductRegister /></ProtectedRoute>} />
+        <Route path="/product/search/:catalog" element={<ProtectedRoute><ProductSearch /></ProtectedRoute>} />
+        <Route path="/product/:productId" element={<ProtectedRoute><ProductEdit /></ProtectedRoute>} />
+        <Route path="/clients" element={<ProtectedRoute><ProtectedRoute><ClientDashboard /></ProtectedRoute></ProtectedRoute>} />
+        <Route path="/clients/profile/:clientId" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
+        <Route path="/clients/newcharge/:clientId" element={<ProtectedRoute><ClientCharge /></ProtectedRoute>} />
+        <Route path="/productExcelUP" element={<ProtectedRoute><ProductExcel /></ProtectedRoute>} />
+        <Route path="/clientExcelUP" element={<ProtectedRoute><ClientExcel /></ProtectedRoute>} />
+        <Route path="/catalogregister" element={<ProtectedRoute><CatalogRegister /></ProtectedRoute>} />
+        <Route path="/info" element={<ProtectedRoute><DataInfo /></ProtectedRoute>} />
+        <Route path="/clientsDashboard" element={<ProtectedRoute><ClientDashboard /></ProtectedRoute>} />
+        <Route path="/login" element={<ProtectedLogin><LoginPage /></ProtectedLogin>} />
+        <Route path="/register" element={<ProtectedLogin><RegisterUser /></ProtectedLogin>} />
 
       </Routes>
       <nav id="NavBar">
