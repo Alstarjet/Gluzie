@@ -1,0 +1,84 @@
+/* LandingPage.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.landing-page {
+    text-align: center;
+}
+
+.header {
+    background-color: #4a90e2; /* Color principal asociado a la marca */
+    color: #fff;
+    padding: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 3em;
+}
+
+.header p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.main-section, .features-section, .call-to-action {
+    padding: 0 20px;
+}
+
+.main-section h2, .features-section h2, .call-to-action h2 {
+    color: #4a90e2; /* Color de los encabezados */
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    width: 250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature h3 {
+    color: #4a90e2;
+}
+
+.call-to-action {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.call-to-action button {
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 1rem
+}
+
+.call-to-action button:hover {
+    background-color: #357abd;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    bottom: 0;
+}

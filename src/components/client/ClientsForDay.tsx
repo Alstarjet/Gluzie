@@ -10,16 +10,21 @@ interface ClientsForDay {
 }
 
 function ClientsForDay({Clients}: ClientsForDay) {
-  const [clients, setClients] = useState<ClientData[]>([])
+  const [clients, setClients] = useState<ClientData[]| null>(null)
+  console.log(clients)
   useEffect(() => {
     console.log(Clients)
     async function ConsultClient() {
       try {
         let all: ClientData[] = [];
         for (const client of Clients) {
+          console.log(client)
           const clientData = await GetClientData(client);
+          console.log(clientData)
           all.push(clientData);
         }
+        console.log("VAMOS")
+        console.log(all)
         setClients(OrderClients(all));
       } catch (error) {
         console.log("Problema al cargar data de clientes", error);
@@ -28,7 +33,13 @@ function ClientsForDay({Clients}: ClientsForDay) {
 
     ConsultClient();
   }, [Clients]);
+  if (clients==null||(clients[0]==undefined && clients.length==1)){
+    return(
+      <div className=''>
 
+      </div>
+    )
+  }
   return (
     <div className=''>
       {clients.map((ClientData, index) => (
@@ -106,6 +117,8 @@ async function GetClientData(client: client): Promise<ClientData> {
 }
 
 function OrderClients(Clients: ClientData[]): ClientData[] {
+  console.log("ORDER")
+  console.log(Clients)
   let ClientsFinal: ClientData[] = []
   let ClientBlock: ClientData[] = []
   Clients.sort((a, b) => b.LastPayment - a.LastPayment)
@@ -120,5 +133,8 @@ function OrderClients(Clients: ClientData[]): ClientData[] {
       ClientBlock.push(Clients[i])
     }
   }
+  ClientBlock.sort((a, b) => b.LastCharge - a.LastCharge);
+  ClientsFinal.push(...ClientBlock);
+  console.log(ClientsFinal)
   return ClientsFinal
 }

@@ -70,7 +70,7 @@ function ClientSummary({ DataClient }: ClientItemProps) {
 
     return (
         <div className='pageUse'>
-            <h3>Total de deuda: ${debt}</h3>
+            <h3>Total de deuda: ${debt.toFixed(2)}</h3>
             <div className='tableSummary'>
                 {showinfo.map((item, index) => (
                 <Fragment key={index}>

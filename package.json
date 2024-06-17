@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
+    "crypto-js": "^4.2.0",
+    "crypto-ts": "^1.0.2",
+    "file-saver": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
@@ -19,6 +22,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@types/uuid": "^9.0.8",

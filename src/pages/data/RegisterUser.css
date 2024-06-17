@@ -1,0 +1,13 @@
+.registerUser label{
+     display: grid;
+     grid-template-columns: 35% 65%;
+     margin: 1rem 0;
+}
+.registerUser{
+    max-width: 600px;
+    margin: 1rem auto;
+}
+.registerUser p{
+    font-size: 0.8rem;
+    text-align: center;
+}

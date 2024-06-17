@@ -1,6 +1,5 @@
 import { chargesDB } from "../database/chargesDBController";
 import { clientsDB } from "../database/clientsDBController";
-import { productsDB } from "../database/productsDBController";
 import { paymentsDB } from "../database/paymentsDBController";
 import { ordersDB } from "../database/ordersDBController";
 import type { DataOffCloud } from '../interfaces/API'
@@ -39,13 +38,11 @@ async function ConsutDataOffCloud(): Promise<DataOffCloud> {
         clients: [],
         payments: [],
         charges: [],
-        products: [],
         orders: [],
         deviceid: ""
     }
     data.charges = await chargesDB.readChargesOffCloud()
     data.clients = await clientsDB.readClientsOffCloud()
-    data.products = await productsDB.readProductsOffCloud()
     data.payments = await paymentsDB.readPaymentsOffCloud()
     data.orders = await ordersDB.readOrdersOffCloud()
     const DeviceID = localStorage.getItem('Device')
@@ -68,8 +65,6 @@ function updateOffCloud(data:DataOffCloud){
     data.payments.forEach((iteam)=>{
         paymentsDB.updatePaymentCloud(iteam)
     })
-    data.products.forEach((iteam)=>{
-        productsDB.updateProductCloud(iteam)
-    })
+
 }
 export  {postData};

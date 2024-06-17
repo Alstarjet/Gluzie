@@ -1,5 +1,4 @@
-
-
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @media (min-width: 769px) {
   #root {
     width: 100%;
@@ -7,12 +6,11 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1rem;
-    margin-top: 3rem;
     color: black;
 
   }
 }
+
 @media (max-width: 768px) {
   #root {
     width: 100%;
@@ -20,30 +18,62 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1rem;
+    align-items: center;
     margin-bottom: 3rem;
     color: black;
 
   }
 }
 
-.pageUse button{
+.pageUse button {
   background-color: #3275cc;
   color: aliceblue;
 }
-.ProductList{
+
+.ProductList {
   display: flex;
   justify-content: space-around;
 }
-.CardProduct{
+
+.CardProduct {
   background-color: cadetblue;
   color: aliceblue;
   font-weight: 600;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
 }
-input{
+
+input {
   background-color: white;
   color: black;
   font-size: 1rem;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+#root>div {
+  padding: 0rem 1rem 1rem 1rem;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  line-height: 0.5;
+  font-weight: 500;
+  text-align: center;
+}
+
+header {
+  width: 100%;
+  padding-left: 1rem;
+  background: rgb(226, 51, 151);
+  background: linear-gradient(15deg, rgba(226, 51, 151, 1) 0%, rgba(69, 67, 255, 1) 100%);
+  color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+h1{
+  font-size: 1.5rem !important;
+  font-family:"Work Sans", sans-serif;
+}
+
