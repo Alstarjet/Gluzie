@@ -37,15 +37,3 @@
     justify-content: space-around;
     margin-bottom: 1rem;
 }
-.headClient button{
-    max-height: 3rem;
-    margin-top: auto;
-    margin-bottom: auto;
-
-}
-
-.headClient{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem; 
-}

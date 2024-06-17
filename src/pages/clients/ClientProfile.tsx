@@ -8,7 +8,7 @@ import ClientEdit from "../../components/client/ClientEdit"
 
 import { clientsDB } from "../../database/clientsDBController";
 import type { client } from '../../interfaces/client'
-
+import './ClientProfile.css'
 
 function ClientProfile() {
     const { clientId } = useParams();
@@ -40,10 +40,20 @@ function ClientProfile() {
     }
 
     return (
-        <div key={client.uuid} className='pageUse'>
+        <div key={client.uuid} className='pageUse ProfileClient'>
             <div className='headClient'>
-                <button onClick={() => setContext('edit')} className='minButton2 buttonBlue'>Ediar</button>
                 <h2>{client.name} {client.lastname}</h2>
+                <div>
+                    <div className='viewDataClient'>
+                        <button onClick={() => setContext('edit')} className='minButton2 buttonBlue'>Ediar</button>
+                        <div>
+                            <p>Dir: {client.address}</p>
+                            <p>Tel: {client.phone}</p>
+                            <p>Dia Agendado: {client.daywork}</p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
             <div className="flexdist">
@@ -51,13 +61,7 @@ function ClientProfile() {
                 <Link to={"/clients/newcharge/" + client.uuid}><button className="minButton buttonPurple">Agregar Cargo</button></Link>
                 <button onClick={() => setContext('payment')} className="minButton buttonGreen">Agregar Pago</button>
             </div>
-            {contex == "summary" &&
-                <div className='viewDataClient'>
-                    <p>Dir: {client.address}</p>
-                    <p>Tel: {client.phone}</p>
-                    <p>Dia Agendado: {client.daywork}</p>
-                </div>
-            }
+
             {contex == "summary" && <ClientSummary DataClient={client}></ClientSummary>}
             {contex == "payment" && <AddPayment DataClient={client}></AddPayment>}
             {contex == "edit" && <ClientEdit DataClient={client} Reload={() => updatefun()}></ClientEdit>}
@@ -67,4 +71,3 @@ function ClientProfile() {
     )
 }
 export default ClientProfile;
- 

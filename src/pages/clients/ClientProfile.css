@@ -1,0 +1,52 @@
+.ProfileClient{
+    width: 100%;
+}
+
+.ProfileClient p{
+    margin: 0;
+    line-height: 1rem;
+    text-align: right;
+}
+.ProfileClient h2{
+    margin: 0.5rem 0;
+    text-align: right;
+    line-height: 1.5rem;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    font-family:"Work Sans", sans-serif;
+}
+.headClient button{
+    max-height: 3rem;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+.headClient{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    flex-direction: column;
+}
+.headClient .viewDataClient{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ProfileClient button {
+    border: 1px solid transparent;
+    min-height: 3rem;
+    padding: 0.5em 0.6em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    font-family:"Work Sans", sans-serif;
+  }
+  .ProfileClient .flexdist{
+    margin-bottom: 0.5rem;
+  }
+  .ProfileClient .paymentView p{
+  text-align: left;
+  font-size: 1.2rem;
+  }
