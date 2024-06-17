@@ -6,7 +6,7 @@ interface OrderItemProps {
   DataOrder: charge;
 }
 function OrderItem({ DataOrder }: OrderItemProps) {
-  const link = "order/" + DataOrder.uuid;
+  const link = "/order/" + DataOrder.uuid;
   const fechaFormateada: string = formatDate(DataOrder.createat)
   let StringProduct: string = ""
   DataOrder.products.forEach((a) => {
