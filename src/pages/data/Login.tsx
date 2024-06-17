@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Login from '../../backend/login'
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 function LoginPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
@@ -14,7 +13,12 @@ function LoginPage() {
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
     };
-
+    useEffect(()=>{
+        const emailL=localStorage.getItem("Email")
+        if (emailL!=null){
+            setEmail(emailL)
+        }
+    },[])
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         let status: number
@@ -30,13 +34,13 @@ function LoginPage() {
             return
         }
         if (status == 200) {
-            navigate('/');
+            navigate('/clients');
         }
     };
 
     return (
-        <div className='ClearForm'>
-            <h1>Iniciar Sesión</h1>
+        <div className='ClearForm registerUser'>
+            <h2>Iniciar Sesión</h2>
             {force && (
                 <div className="alert">
                     <p>El inicio de sesión forzado desvinculará las sesiones en otros dispositivos.</p>
@@ -45,28 +49,30 @@ function LoginPage() {
             )}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="email">Correo Electrónico:</label>
+                    <label htmlFor="email">Email:
                     <input
                         type="email"
                         id="email"
                         value={email}
                         onChange={handleEmailChange}
                         required
-                    />
+                    /></label>
                 </div>
                 <div>
-                    <label htmlFor="password">Contraseña:</label>
+                    <label htmlFor="password">Contraseña:
                     <input
                         type="password"
                         id="password"
                         value={password}
                         onChange={handlePasswordChange}
                         required
-                    />
+                    /></label>
                 </div>
                 <button type="submit" className={force ? 'btn_alert' : ''}>
                     {force ? 'Inicio Forzado' : 'Iniciar Sesión'}
                 </button>
+                <p>¿No tienes cuenta?,<Link to='/register'> <u>registrate aqui</u></Link>
+                    </p>
             </form>
         </div>
     );

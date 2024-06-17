@@ -15,11 +15,9 @@ let db: IDBDatabase
 function openDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
     if (db) {
-      console.log("La base ya esta habierta")
       // Si la base de datos ya está abierta, resuelve inmediatamente
       resolve(db);
     } else {
-      console.log("Iniciando Base de datos")
       const openRequest = indexedDB.open(nameDB, version);
 
       openRequest.onupgradeneeded = function (event) {

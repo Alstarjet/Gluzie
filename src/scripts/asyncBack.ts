@@ -11,14 +11,19 @@ function asyncBack() {
     }
     syncFunc()
     if (ENVIRONMENT == "local") {
-        intervalId = setInterval(syncFunc, 10000)
+        intervalId = setInterval(syncFunc, 20000)
     } else {
-        intervalId = setInterval(syncFunc, 40000)
+        intervalId = setInterval(syncFunc, 50000)
     }
 }
 
 async function syncFunc() {
+    const tokenCheck=localStorage.getItem("Token")
+    if (tokenCheck==""||tokenCheck==null){
+        return
+    }
     const typeClient=CryptoStorage.consultTypeclient()
+    console.log("Typoe "+typeClient)
     let timeToUp:number
     if(ENVIRONMENT == "local"){
         if (typeClient==""||typeClient=="Quartz"){
@@ -30,7 +35,7 @@ async function syncFunc() {
         if (typeClient==""||typeClient=="Quartz"){
             timeToUp=(1000*60*60*20)
         }else{
-            timeToUp=(1000*60*20)
+            timeToUp=(1000*60*10)
         }
     }
     const BackDate = localStorage.getItem('BackDate')
@@ -62,6 +67,7 @@ async function InitBackDirect(): Promise<number> {
     const currentDate = new Date
     try {
         const LocalData = await ConsutDataOffCloud()
+        console.log(LocalData)
         if (!LocalData.hasContent) {
             console.log("Respaldo no necesario")
             return 200

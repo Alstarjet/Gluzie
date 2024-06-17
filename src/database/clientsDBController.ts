@@ -123,6 +123,44 @@ function readClientsOffCloud():Promise<client[]> {
         }
     });
 }
+function deleteClientsOnCloud(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const db = await openDatabase();
+            const transaction = db.transaction(keysDB.clients.Store, "readwrite");
+            const store = transaction.objectStore(keysDB.clients.Store);
+
+            const index = store.index(keysDB.cloud.KeyPath);
+            const request = index.getAllKeys(1); // Get all keys with value 1
+
+            request.onsuccess = function () {
+                const keys = request.result;
+                if (keys.length > 0) {
+                    const deletePromises = keys.map(key => {
+                        return new Promise<void>((resolve, reject) => {
+                            const deleteRequest = store.delete(key);
+                            deleteRequest.onsuccess = () => resolve();
+                            deleteRequest.onerror = () => reject(deleteRequest.error);
+                        });
+                    });
+
+                    Promise.all(deletePromises)
+                        .then(() => resolve())
+                        .catch(error => reject(error));
+                } else {
+                    resolve(); // No clients with value 1 found
+                }
+            };
+
+            request.onerror = function () {
+                reject(request.error);
+            };
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 
 async function GetEditClient(ClientObjs:client) {
     const db = await openDatabase();
@@ -147,6 +185,7 @@ const clientsDB ={
     updateClientCloud,
     findClient,
     readClientsOffCloud,
-    GetEditClient
+    GetEditClient,
+    deleteClientsOnCloud
 }
 export {clientsDB}

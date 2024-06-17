@@ -1,6 +1,7 @@
 import { saveDataOfCloud } from './getData'
 import type { GetData } from '../interfaces/API'
 import CryptoStorage from '../localstorage/mangerstorage'
+import { clientsDB } from '../database/clientsDBController'
 interface LoginResponse {
     token: string
     expires: Date
@@ -24,6 +25,7 @@ async function Login(email: string, password: string,path :string): Promise<numb
 
         const response = await fetch(URL_BACK + path, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -33,9 +35,9 @@ async function Login(email: string, password: string,path :string): Promise<numb
             return response.status
         }
         const data: LoginResponse = await response.json();
- 
+        //await clientsDB.deleteClientsOnCloud()
         saveDataOfCloud(data.data)
-
+        localStorage.setItem('Email', email)
         localStorage.setItem('Token', data.token)
         localStorage.setItem('TokenExpires', data.expires.toString())
         localStorage.setItem('UserName', data.username)

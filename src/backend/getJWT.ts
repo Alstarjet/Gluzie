@@ -14,8 +14,11 @@ async function getNewJWT(): Promise<number> {
     const expiresJWT = localStorage.getItem('TokenExpires');
     if (expiresJWT) {
         const expiresDate = new Date(expiresJWT);
-        if (expiresDate > new Date()) {
-            return 200
+        const now = new Date();
+        const thirtySecondsFromNow = new Date(now.getTime() + 15 * 1000); // Añadir 30 segundos a la fecha y hora actuales
+    
+        if (expiresDate > thirtySecondsFromNow) {
+            return 200;
         }
     }
     try {
@@ -27,6 +30,7 @@ async function getNewJWT(): Promise<number> {
             },
         });
         if (response.status >= 200 && response.status <= 299) {
+            console.log("usamos refresh")
             const data: LoginResponse = await response.json();
             localStorage.setItem('Token', data.token);
             localStorage.setItem('TokenExpires', data.expires.toString())

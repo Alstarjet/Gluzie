@@ -4,10 +4,13 @@
     align-items: center;
     flex-direction: column;
 }
-.Databoard a{
-    margin-bottom: 1rem;
-}
+
 .Databoard button{
     background-color: #3275cc;
     color: aliceblue;
+    width: 100%;
+    margin: 1rem 0;
+}
+.Databoard a{
+    width: 100%;
 }

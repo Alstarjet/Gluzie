@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import './RegisterUser.css'
 interface User {
     name: string;
     lastName: string;
@@ -19,35 +19,41 @@ const RegisterUser: React.FC = () => {
         phone: 0,
     });
 
-    const [acceptTerms, setAcceptTerms] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setUser({
-            ...user,
-            [name]: value,
-        });
+        if (name == 'phone') {
+            setUser({
+                ...user,
+                [name]: parseInt(value),
+            });
+        } else {
+            setUser({
+                ...user,
+                [name]: value,
+            });
+        }
     };
 
-    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setAcceptTerms(e.target.checked);
-    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!acceptTerms) {
-            alert('You must accept the terms and conditions');
-            return;
-        }
+
         const status = await registerUserPost(user)
         if (status >= 200 && status <= 299) {
             navigate('/login');
         }
         console.log(user);
     };
-
-    return (
-        <form onSubmit={handleSubmit} className='ClearForm'>
+    const goBack = () => {
+        window.history.back();
+    };
+    return (<div className='ClearForm registerUser'>
+                    <div className='HeadFormsBack'>
+                <button onClick={goBack}>Atras</button>
+                <h2>Registro de Usuario</h2>
+            </div>
+        <form onSubmit={handleSubmit} className=''>
             <div>
                 <label>
                     Nombre:
@@ -60,6 +66,7 @@ const RegisterUser: React.FC = () => {
                         autoComplete='off'
                     />
                 </label>
+
             </div>
             <div>
                 <label>
@@ -75,7 +82,7 @@ const RegisterUser: React.FC = () => {
             </div>
             <div>
                 <label>
-                    Correo Electronico:
+                    Email:
                     <input
                         type="email"
                         name="email"
@@ -88,7 +95,7 @@ const RegisterUser: React.FC = () => {
             </div>
             <div>
                 <label>
-                    Constraseña:
+                    Contraseña:
                     <input
                         type="password"
                         name="password"
@@ -101,7 +108,7 @@ const RegisterUser: React.FC = () => {
             </div>
             <div>
                 <label>
-                    Numero de Telefono:
+                    N.Telefono:
                     <input
                         type="number"
                         name="phone"
@@ -112,19 +119,16 @@ const RegisterUser: React.FC = () => {
                 </label>
             </div>
             <div>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={acceptTerms}
-                        onChange={handleCheckboxChange}
-                    />
-                    Accept Terms and Conditions
-                </label>
+                <p>
+                    Al registrarte y hacer uso de nuestra aplicación, aceptas nuestros <a href="/termsandconditions" target="_blank">Términos y Condiciones</a>, <a href="/cookiepolicy" target="_blank">Politica de Cookies</a> y <a href="/privacypolicy" target="_blank">Política de Privacidad</a>.
+                </p>
             </div>
+
             <div>
                 <button type="submit">Registrarce</button>
             </div>
         </form>
+        </div>
     );
 };
 
@@ -147,7 +151,7 @@ async function registerUserPost(user: User): Promise<number> {
             alert(await response.text())
             return response.status
         } else {
-            alert("problema inesperado")
+            alert("Problema inesperado, intentalo mas tarde")
         }
         return response.status
     } catch (error) {

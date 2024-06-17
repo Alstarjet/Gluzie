@@ -10,7 +10,7 @@ const ProtectedLogin: React.FC<ProtectedLoginProps> = ({ children }) => {
 
   if (token) {
     // Si el token no existe, redirigir a la página de inicio de sesión
-    return <Navigate to="/dataexplore" />;
+    return <Navigate to="/clients" />;
   }
 
   // Si el token existe, renderizar los componentes hijos

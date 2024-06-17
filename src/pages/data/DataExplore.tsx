@@ -9,14 +9,16 @@ import { useEffect, useState } from "react";
 import LogOff from "../../backend/logOff";
 import { InitBackDirect } from "../../scripts/asyncBack";
 import getNewJWT from "../../backend/getJWT";
+import createExcelAllData from "../../scripts/createExcelBackup";
 function DataExplore() {
   const navigate = useNavigate();
-  const [typeC, setTypeC] = useState<string>("Hol");
-
+  const [typeC, setTypeC] = useState<string>("");
+  const [nameClient,setNameClient]=useState<string|null>()
   useEffect(() => {
-    let client = CryptoStorage.consultTypeclient();
-    console.log('Client:', client, "hola"); // Verifica el valor de client
-    setTypeC(client);
+    const clientT = CryptoStorage.consultTypeclient();
+    const clientN=localStorage.getItem('UserName')
+    setTypeC(clientT);
+    setNameClient(clientN)
   }, []);
 
   useEffect(() => {
@@ -52,16 +54,18 @@ function DataExplore() {
     }
 
   }
-
+  async function CreateExcel() {
+    await createExcelAllData()
+  }
   return (
     <div className='Databoard'>
-      <h2><PiMicrosoftExcelLogoFill /> Menu de Datos</h2>
-      <Link to="/productExcelUP"><button className='grandButton buttonBlue'><LuBoxes /> Cargar Productos</button></Link>
+      <h2> Hola {nameClient}</h2>
+      <button onClick={LogOffs} className='grandButton buttonBlue'><IoSyncCircle /> Cerrar Sesión</button>
+      <Link to="/productExcelUP"><button className='grandButton buttonBlue'><LuBoxes /> Cargar Productos desde Excel</button></Link>
+      <button onClick={CreateExcel} className='grandButton buttonBlue'><PiMicrosoftExcelLogoFill /> Descargar Respaldo en Excel </button>
       {(typeC == 'Amethyst') && (
         <button onClick={GetData} className='grandButton buttonBlue'><IoSyncCircle /> Sincronizar Datos</button>
       )}
-      <button onClick={LogOffs} className='grandButton buttonBlue'><IoSyncCircle /> Cerrar Sección</button>
-
     </div>
   );
 }

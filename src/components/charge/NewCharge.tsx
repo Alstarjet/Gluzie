@@ -113,7 +113,7 @@ function NewCharge({ charge, setCharge }: ClientComponents) {
 
             <div className='CostResum'>
                 <label>
-                    Descuento:
+                    Descuento %:
                     <input type="number" name="discout" value={charge.discount} onChange={handleDiscount} />
                 </label>
                 <label>

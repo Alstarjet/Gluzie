@@ -14,7 +14,7 @@ function OrderItem({ DataOrder }: OrderItemProps) {
   })
   return (
     <div key={DataOrder.uuid} className='orderItem cardClear'>
-      <p className="texthidden">Creado: {fechaFormateada} </p>
+      <p className="texthidden">{fechaFormateada} </p>
       <p><i><b>{(DataOrder.clientname != "Null") ? DataOrder.clientname : "Sin Cliente Asignado"}</b></i> ${DataOrder.finalprice}</p>
       <p>Productos:{StringProduct}</p>
       <Link to={link}><button className='button-5'>Seleccionar</button></Link>

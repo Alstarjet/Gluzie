@@ -21,10 +21,15 @@ import EditOrder from './pages/orders/EditOrder'
 import CatalogRegister from './pages/products/CatalogRegister'
 import ClientDashboard from "./pages/clients/ClientDashboard";
 import LoginPage from "./pages/data/Login";
-import {asyncBack} from './scripts/asyncBack'
+import { asyncBack } from './scripts/asyncBack'
 import ProtectedRoute from "./components/utilities/ProtectedRoute";
 import ProtectedLogin from "./components/utilities/ProtectedLogin";
 import RegisterUser from "./pages/data/RegisterUser";
+import TermsAndConditions from "./pages/static/TermsAndConditions";
+import LandingPage from "./pages/static/landingpage";
+import Installpwa from "./pages/static/installpwa";
+import CookiePolicy from "./pages/static/CookiePolicy";
+import PrivacyPolicy from "./pages/static/PrivacyPolicy";
 import './App.css'
 import './css/nav.css'
 import './css/colors.css'
@@ -38,16 +43,20 @@ import './css/data.css'
 
 import { openDatabase } from './database/indexedDBConect'
 import { useEffect } from "react";
-
 function App() {
+
 
   useEffect(() => { asyncBack() }, [])
 
   openDatabase()
   return (
     <BrowserRouter >
+      <header>
+        <h1>gluzie.com </h1>
+      </header>
+      <Installpwa></Installpwa>
       <Routes>
-        <Route path="/" element={<ProtectedRoute><OrderSearch /></ProtectedRoute>} />
+        <Route path="/orders" element={<ProtectedRoute><OrderSearch /></ProtectedRoute>} />
         <Route path="/neworder" element={<ProtectedRoute><NewOrder /></ProtectedRoute>} />
         <Route path="/order/:orderId" element={<ProtectedRoute><EditOrder /></ProtectedRoute>} />
         <Route path="/dataexplore" element={<ProtectedRoute><DataExplore /></ProtectedRoute>} />
@@ -66,12 +75,14 @@ function App() {
         <Route path="/clientsDashboard" element={<ProtectedRoute><ClientDashboard /></ProtectedRoute>} />
         <Route path="/login" element={<ProtectedLogin><LoginPage /></ProtectedLogin>} />
         <Route path="/register" element={<ProtectedLogin><RegisterUser /></ProtectedLogin>} />
-
+        <Route path="/termsandconditions" element={<TermsAndConditions />} />
+        <Route path="/cookiepolicy" element={<CookiePolicy />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/" element={<LandingPage />} />
       </Routes>
       <nav id="NavBar">
-
-        <Link to="/" className="ToLink">Pedidos</Link>
-        <Link to="/dataexplore" className="ToLink" >Data</Link>
+        <Link to="/dataexplore" className="ToLink" >Menu</Link>
+        <Link to="/orders" className="ToLink">Pedidos</Link>
         <Link to="/clients" className="ToLink">Clientes</Link>
         <Link to="/product" className="ToLink" >Productos</Link>
       </nav>
