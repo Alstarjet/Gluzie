@@ -43,7 +43,7 @@ function ClientEdit({ DataClient, Reload }:ClientItemProps) {
     ) {
       const resultado = window.confirm('¿Los datos del cliente son correctos?');
       if (resultado) {
-        clientsDB.updateClientCloud(client);
+        clientsDB.editClient(client);
         Reload()
       } 
     }else {
@@ -56,6 +56,7 @@ function ClientEdit({ DataClient, Reload }:ClientItemProps) {
       <div className='FormView'>
       <ClientForm client={client} onChange={handleChange} />
         <button onClick={handleAddClient} className='grandButton buttonBlue'>Guardar Cambios</button>
+        <pre>{JSON.stringify(client, null, 2)}</pre>
       </div>
     </div>
   );
