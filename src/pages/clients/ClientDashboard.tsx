@@ -4,7 +4,7 @@ import ClientsForDay from '../../components/client/ClientsForDay';
 import type { client } from '../../interfaces/client'
 import ClientsSearch from '../../components/client/ClientsSearch'
 import './ClientDashboard.css'
-
+import FeedAdSense from '../../adsense/feed';
 function ClientDashboard() {
   const [clientsfDay, setClientsfDay] = useState<client[][]>([]);
   const [selectedDay, setSelectedDay] = useState(0); // Estado para el día seleccionado, comenzando con 0 (domingo)
@@ -59,6 +59,7 @@ function ClientDashboard() {
           {workDays[nextDayIndex]}
         </button>
       </div>
+      <FeedAdSense></FeedAdSense>
       <ClientsForDay Clients={clientsfDay[selectedDay]} />
     </div>
   );
