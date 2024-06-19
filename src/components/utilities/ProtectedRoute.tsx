@@ -10,7 +10,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   if (!token) {
     // Si el token no existe, redirigir a la página de inicio de sesión
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   // Si el token existe, renderizar los componentes hijos

@@ -2,13 +2,14 @@ import React from 'react';
 import './LandingPage.css';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
+import HomeAdSense from '../../adsense/home';
 const LandingPage: React.FC = () => {
     return (
-        <div className="landing-page ClearForm">
+        <div className="landing-page">
             <CallToAction />
             <MainSection />
             <FeaturesSection />
+            <HomeAdSense></HomeAdSense>
             <Footer />
         </div>
     );

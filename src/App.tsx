@@ -56,7 +56,7 @@ function App() {
       </header>
       <Installpwa></Installpwa>
       <Routes>
-        <Route path="/orders" element={<ProtectedRoute><OrderSearch /></ProtectedRoute>} />
+        <Route path="/orders" element={<OrderSearch />} />
         <Route path="/neworder" element={<ProtectedRoute><NewOrder /></ProtectedRoute>} />
         <Route path="/order/:orderId" element={<ProtectedRoute><EditOrder /></ProtectedRoute>} />
         <Route path="/dataexplore" element={<ProtectedRoute><DataExplore /></ProtectedRoute>} />
@@ -65,14 +65,14 @@ function App() {
         <Route path="/productregister" element={<ProtectedRoute><ProductRegister /></ProtectedRoute>} />
         <Route path="/product/search/:catalog" element={<ProtectedRoute><ProductSearch /></ProtectedRoute>} />
         <Route path="/product/:productId" element={<ProtectedRoute><ProductEdit /></ProtectedRoute>} />
-        <Route path="/clients" element={<ProtectedRoute><ProtectedRoute><ClientDashboard /></ProtectedRoute></ProtectedRoute>} />
+        <Route path="/clients" element={<ClientDashboard />} />
         <Route path="/clients/profile/:clientId" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
         <Route path="/clients/newcharge/:clientId" element={<ProtectedRoute><ClientCharge /></ProtectedRoute>} />
         <Route path="/productExcelUP" element={<ProtectedRoute><ProductExcel /></ProtectedRoute>} />
         <Route path="/clientExcelUP" element={<ProtectedRoute><ClientExcel /></ProtectedRoute>} />
         <Route path="/catalogregister" element={<ProtectedRoute><CatalogRegister /></ProtectedRoute>} />
         <Route path="/info" element={<ProtectedRoute><DataInfo /></ProtectedRoute>} />
-        <Route path="/clientsDashboard" element={<ProtectedRoute><ClientDashboard /></ProtectedRoute>} />
+        <Route path="/clientsDashboard" element={<ClientDashboard />} />
         <Route path="/login" element={<ProtectedLogin><LoginPage /></ProtectedLogin>} />
         <Route path="/register" element={<ProtectedLogin><RegisterUser /></ProtectedLogin>} />
         <Route path="/termsandconditions" element={<TermsAndConditions />} />

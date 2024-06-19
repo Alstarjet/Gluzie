@@ -3,7 +3,7 @@ import { Link,} from "react-router-dom";
 import OrderItem from '../../components/order/OrderItem';
 import { ordersDB } from "../../database/ordersDBController";
 import { RiAddCircleFill } from "react-icons/ri";
-
+import FeedAdSense from '../../adsense/feed';
 import type { charge } from '../../interfaces/catalog'
 
 function OrderSearch({ }) {
@@ -45,6 +45,7 @@ function OrderSearch({ }) {
       <input type="text" id="buscador" value={name} placeholder="Buscar Pedido por cliente..." onChange={handleChange} className='searchOrder' />
       <Link to="/neworder" className="ToLink"><RiAddCircleFill className='IcoAdd'/><p>Nuevo</p></Link>
       </div>
+      <FeedAdSense></FeedAdSense>
       {ArrayOrdersFilter.map(item => (
         <OrderItem DataOrder={item} ></OrderItem>
       ))}
