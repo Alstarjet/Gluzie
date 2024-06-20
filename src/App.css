@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&family=Yantramanav:wght@100;300;400;500;700;900&display=swap');
 @media (min-width: 769px) {
   #root {
     width: 100%;
@@ -7,6 +9,7 @@
     flex-direction: column;
     justify-content: flex-start;
     color: black;
+
 
   }
 }
@@ -77,3 +80,9 @@ h1{
   font-family:"Work Sans", sans-serif;
 }
 
+.simpleFlex {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

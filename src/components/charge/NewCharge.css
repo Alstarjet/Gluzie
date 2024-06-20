@@ -63,3 +63,14 @@ grid-template-columns:12% 30% 12% 18% 25% ;
     border-style:solid;
     border-radius: 1rem;
 }
+.productsShow{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.productsShow div {
+    padding: 0.1rempx;
+    white-space: nowrap; /* No permite que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta el contenido que desborda */
+    text-overflow: ellipsis; /* Muestra los puntos suspensivos si el texto es demasiado largo */
+}
