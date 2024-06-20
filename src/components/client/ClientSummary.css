@@ -4,20 +4,81 @@
     align-items: center;
     border-radius: 1rem;
     background-color: aqua;
-    margin-bottom: 0.5rem;
-    padding: 0.7rem;
+    margin-bottom: 0.3rem;
+    padding: 0.5rem;
+    font-family: "Yantramanav", sans-serif;
 }
-.IteamSummary h4{
+
+.IteamSummary h4 {
     margin: 0;
 }
+
 .tableSummary {
     display: flex;
     flex-direction: column;
 }
-.PaymentIteam{
+
+.PaymentIteam {
     background-color: aquamarine;
 }
-.ChargeIteam{
-    background-color:rgba(255, 153, 94, 0.849);
+
+.ChargeIteam {
+    background-color: rgba(255, 153, 94, 0.849);
     color: black;
+}
+
+.moredata {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.IteamSummary .resume {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 23% 20% 28% 28%;
+    text-align: left;
+}
+
+.ChargeIteam .Today {
+    background-color: rgba(255, 94, 0, 0.849);
+    border-radius: 0.4rem;
+    text-align: center;
+    margin: 0 0.5rem;
+    font-weight: 500;
+}
+
+.IteamSummary .resume div:nth-child(2) {
+    text-align: right;
+    background-color: rgba(255, 255, 255, 0.432);
+    border-radius: 0.4rem;
+    text-align: center;
+    margin: 0 0.5rem;
+}
+.IteamSummary  .show{
+    opacity: 1;
+    max-height: 1000px; /* Suficiente para contener el contenido */
+}
+.MoreDatashow{
+    transition: transform 0.5s ease-in-out;
+    transform-origin: center;
+    transform: rotate(180deg)
+}
+.MoreData{
+    transition: transform 0.5s ease-in-out;
+    transform-origin: center;
+    transform: rotate(0deg)
+}
+.headsum{
+    background: linear-gradient(15deg, rgba(226, 51, 151, 1) 0%, rgba(69, 67, 255, 1) 100%);
+    font-weight: 500;
+    color: white;
+}
+.headsum div{
+    text-align: center;
+
+}
+.headsum  .noColor{
+    background-color: transparent !important;
 }

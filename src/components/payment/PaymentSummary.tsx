@@ -1,15 +1,40 @@
-import type { payment } from '../../interfaces/payment'
 import formatDate from '../../scripts/formatDate'
-interface Payment {
-    Payment: payment; // Corrección del nombre de la propiedad y del tipo
+import type AmoutInfo from '../../interfaces/utilities/AmoutInfo';
+import { MdExpandMore } from "react-icons/md";
+import { useState } from 'react';
+
+interface PaymentAmout {
+    AmoutInfo: AmoutInfo
 }
 
-function PaymentSummary({ Payment }: Payment) {
-    return (
-        <div className='IteamSummary PaymentIteam'>
-            <h4>Pago por la Cantidad: ${Payment.amount}</h4>
-            <div>{formatDate(Payment.createat)}</div>
-        </div>
-    )
+function PaymentSummary({ AmoutInfo }: PaymentAmout) {
+    const [more,setMore]=useState<string>("")
+    const changeMore=()=>{
+        console.log("TRY")
+        if (more==""){
+            setMore("show")
+        }else{
+            setMore("")
+        }
+    }
+    if (AmoutInfo.payment != undefined) {
+        return (
+            <div className='IteamSummary PaymentIteam'>
+                <div className='resume' onClick={changeMore}>
+                    <div> {AmoutInfo.payment.createat.getDate() + "/" + AmoutInfo.payment.createat.getMonth() + "/" + AmoutInfo.payment.createat.getFullYear()}</div>
+                    <div>${(AmoutInfo.previus).toFixed(2)}</div>
+                    <div className='Today'>-   ${AmoutInfo.payment.amount}</div>
+                    <div className='simpleFlex'>= ${(AmoutInfo.previus-AmoutInfo.payment.amount).toFixed(2)} <MdExpandMore className={'MoreData'+more}></MdExpandMore></div>
+                </div>
+                <div className={'moredata '+more}>
+                    <h4>Pago por la Cantidad: ${AmoutInfo.payment?.amount}</h4>
+                    <div>{formatDate(AmoutInfo.payment?.createat)}</div>
+                    <h4>Metodo:{AmoutInfo.payment.method}</h4>
+                    <div>Concepto:{AmoutInfo.payment.concept}</div>
+                </div>
+            </div>
+        )
+    }
+
 }
 export default PaymentSummary;

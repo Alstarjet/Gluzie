@@ -1,24 +1,18 @@
-import { useState, useEffect,Fragment } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { paymentsDB } from "../../database/paymentsDBController";
 import { chargesDB } from "../../database/chargesDBController";
 import ChargeSummary from '../charge/ChargeSummary'
 import PaymentSummary from '../payment/PaymentSummary'
 
 import type { client } from '../../interfaces/client'
-import type { charge } from '../../interfaces/catalog'
-import type { payment } from '../../interfaces/payment'
+import type AmoutInfo from '../../interfaces/utilities/AmoutInfo';
 import './ClientSummary.css'
 
 
 interface ClientItemProps {
     DataClient: client; // Corrección del nombre de la propiedad y del tipo
 }
-interface AmoutInfo {
-    payment: payment | undefined
-    charge: charge | undefined
-    date: Date
-    type: string;
-}
+
 
 function ClientSummary({ DataClient }: ClientItemProps) {
 
@@ -40,6 +34,7 @@ function ClientSummary({ DataClient }: ClientItemProps) {
                         payment: paymentsClient[i],
                         date: paymentsClient[i].createat,
                         charge: undefined,
+                        previus: 0,
                         type: "payment"
                     }
                     totalPayments = totalPayments + paymentsClient[i].amount
@@ -50,6 +45,7 @@ function ClientSummary({ DataClient }: ClientItemProps) {
                         charge: chargesClient[i],
                         date: chargesClient[i].createat,
                         payment: undefined,
+                        previus: 0,
                         type: "charge"
                     }
                     totalCharges = totalCharges + chargesClient[i].finalprice
@@ -57,6 +53,21 @@ function ClientSummary({ DataClient }: ClientItemProps) {
                 }
                 showAmouts.sort((a, b) => b.date.getTime() - a.date.getTime());
                 setDebt(totalCharges - totalPayments)
+                let debt:number = 0
+                for (i = showAmouts.length-1; i >= 0; i--) {
+                    console.log(debt)
+                    showAmouts[i].previus=debt
+                    const charge= showAmouts[i].charge
+                    if (charge != undefined) {
+                        debt = debt + charge.finalprice
+                    }else{
+                        const payment= showAmouts[i].payment
+                        if(payment!=undefined){
+                            debt = debt - payment.amount
+                        }
+                    }
+                }
+                console.log(showAmouts)
                 setShowInfo(showAmouts)
 
             } catch (error) {
@@ -72,13 +83,21 @@ function ClientSummary({ DataClient }: ClientItemProps) {
         <div className='pageUse'>
             <h3>Total de deuda: ${debt.toFixed(2)}</h3>
             <div className='tableSummary'>
+            <div className='IteamSummary headsum'>
+                <div className='resume '>
+                    <div> Fecha</div>
+                    <div className='noColor'>Deuda</div>
+                    <div>Movimiento</div>
+                    <div>Saldo Final</div>
+                </div>
+                </div>
                 {showinfo.map((item, index) => (
-                <Fragment key={index}>
-                {item.type === "charge" && item.charge ? (
-                            <ChargeSummary Charge={item.charge} />
+                    <Fragment key={index}>
+                        {item.type === "charge" && item.charge ? (
+                            <ChargeSummary AmoutInfo={item} />
                         ) : (
                             item.type === "payment" && item.payment ? (
-                                <PaymentSummary Payment={item.payment} />
+                                <PaymentSummary AmoutInfo={item} />
                             ) : null
                         )}
                     </Fragment>
