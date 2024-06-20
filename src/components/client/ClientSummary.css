@@ -70,3 +70,15 @@
     transform-origin: center;
     transform: rotate(0deg)
 }
+.headsum{
+    background: linear-gradient(15deg, rgba(226, 51, 151, 1) 0%, rgba(69, 67, 255, 1) 100%);
+    font-weight: 500;
+    color: white;
+}
+.headsum div{
+    text-align: center;
+
+}
+.headsum  .noColor{
+    background-color: transparent !important;
+}

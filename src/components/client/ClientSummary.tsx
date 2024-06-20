@@ -83,10 +83,10 @@ function ClientSummary({ DataClient }: ClientItemProps) {
         <div className='pageUse'>
             <h3>Total de deuda: ${debt.toFixed(2)}</h3>
             <div className='tableSummary'>
-            <div className='IteamSummary'>
-                <div className='resume'>
+            <div className='IteamSummary headsum'>
+                <div className='resume '>
                     <div> Fecha</div>
-                    <div>Deuda</div>
+                    <div className='noColor'>Deuda</div>
                     <div>Movimiento</div>
                     <div>Saldo Final</div>
                 </div>

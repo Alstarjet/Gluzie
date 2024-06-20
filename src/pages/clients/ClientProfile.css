@@ -50,3 +50,13 @@
   text-align: left;
   font-size: 1.2rem;
   }
+  .ProfileClient h3{
+    margin: 0.4rem 1.5rem;
+    color: rgb(89, 16, 156);
+  }
+  .tableSummary .IteamSummary:nth-child(2) .resume div:nth-child(4){
+    color: rgb(89, 16, 156);
+    font-weight: 600;
+    background-color: white;
+    border-radius: 0.5rem;
+  }
