@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
 
 declare global {
   interface Window {
@@ -18,15 +17,13 @@ const HomeAdSense: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4848884931206344" crossOrigin="anonymous"></script>
-      </Helmet>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4848884931206344" crossOrigin="anonymous"></script>
       <ins className="adsbygoogle"
-           style={{ display: 'block' }}
-           data-ad-client="ca-pub-4848884931206344"
-           data-ad-slot="4674768561"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
+        style={{ display: 'block' }}
+        data-ad-client="ca-pub-4848884931206344"
+        data-ad-slot="4674768561"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
     </>
   );
 };
