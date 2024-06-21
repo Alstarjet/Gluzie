@@ -21,7 +21,7 @@ function PaymentSummary({ AmoutInfo }: PaymentAmout) {
         return (
             <div className='IteamSummary PaymentIteam'>
                 <div className='resume' onClick={changeMore}>
-                    <div> {AmoutInfo.payment.createat.getDate() + "/" + AmoutInfo.payment.createat.getMonth() + "/" + AmoutInfo.payment.createat.getFullYear()}</div>
+                    <div> {AmoutInfo.payment.createat.getDate() + "/" + (AmoutInfo.payment.createat.getMonth()+1) + "/" + AmoutInfo.payment.createat.getFullYear()}</div>
                     <div>${(AmoutInfo.previus).toFixed(2)}</div>
                     <div className='Today'>-   ${AmoutInfo.payment.amount}</div>
                     <div className='simpleFlex'>= ${(AmoutInfo.previus-AmoutInfo.payment.amount).toFixed(2)} <MdExpandMore className={'MoreData'+more}></MdExpandMore></div>

@@ -37,7 +37,7 @@ function ChargeSummary({ AmoutInfo }: ChargeAmout) {
         return (
             <div className='IteamSummary ChargeIteam'>
                 <div className='resume' onClick={changeMore}>
-                    <div> {AmoutInfo.charge.createat.getDate() + "/" + AmoutInfo.charge.createat.getMonth() + "/" + AmoutInfo.charge.createat.getFullYear()}</div>
+                    <div> {AmoutInfo.charge.createat.getDate() + "/" + (AmoutInfo.charge.createat.getMonth()+1) + "/" + AmoutInfo.charge.createat.getFullYear()}</div>
                     <div>${(AmoutInfo.previus).toFixed(2)}</div>
                     <div className='Today'>+ ${AmoutInfo.charge.finalprice}</div>
                     <div className='simpleFlex'>= ${(AmoutInfo.previus + AmoutInfo.charge.finalprice).toFixed(2)} <MdExpandMore className='MoreData'></MdExpandMore></div>
