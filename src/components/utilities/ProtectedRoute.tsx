@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
+//import { Navigate } from 'react-router-dom';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -10,7 +10,9 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   if (!token) {
     // Si el token no existe, redirigir a la página de inicio de sesión
-    return <Navigate to="/" />;
+   // return <Navigate to="/" />;
+    return <>{children}</>;
+
   }
 
   // Si el token existe, renderizar los componentes hijos
