@@ -35,6 +35,8 @@ function LoginPage() {
         }
         if (status == 200) {
             navigate('/clients');
+        }else{
+            alert("Error en usuario o contraseña")
         }
     };
 

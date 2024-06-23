@@ -2,6 +2,7 @@ import { chargesDB } from "../database/chargesDBController";
 import { clientsDB } from "../database/clientsDBController";
 import { paymentsDB } from "../database/paymentsDBController";
 import { ordersDB } from "../database/ordersDBController";
+import CryptoStorage from "../localstorage/mangerstorage";
 
 import type { GetData } from '../interfaces/API'
 
@@ -10,7 +11,7 @@ const URL_BACK = import.meta.env.VITE_URL_BACK
 async function getData(): Promise<number> {
     try {
         let Token = localStorage.getItem('Token')
-        let device = localStorage.getItem('Device')
+        let device = CryptoStorage.consultDeviceID()
         const response = await fetch(URL_BACK + "/GetData?deviceid=" + device, {
             method: 'GET',
             headers: {
@@ -44,7 +45,7 @@ async function getData(): Promise<number> {
 async function deteleIdsCloud(): Promise<boolean> {
     try {
         let Token = localStorage.getItem('Token')
-        let device = localStorage.getItem('Device')
+        let device = CryptoStorage.consultDeviceID()
         const response = await fetch(URL_BACK + "/DeleteIds?deviceid=" + device, {
             method: 'DELETE',
             headers: {
