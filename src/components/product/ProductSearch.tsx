@@ -4,6 +4,7 @@ import { productsDB } from "../../database/productsDBController";
 import type { productInventoryItem } from '../../interfaces/catalog'
 import type { productPropsAddOnly } from './interfaceProduct'
 import type { productCartItem } from '../../interfaces/catalog';
+import searchLever from '../../scripts/searchLever';
 
 function ProductSearch({ AddProduct }: productPropsAddOnly) {
     const [name, setName] = useState('')
@@ -15,15 +16,21 @@ function ProductSearch({ AddProduct }: productPropsAddOnly) {
         const { value } = event.target;
         setName(value);
         if (value.length > 2) {
-            stoneListProducts.forEach(Product => {
-                const SinAcentos = Product.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                const upperCase = SinAcentos.toUpperCase();
-                const letras = value.toUpperCase()
-                const regex = new RegExp(letras.split('').join('.*'), 'i');
-                if (regex.test(upperCase)) {
-                    setArray(prevArray => [...prevArray, Product])
-                }
-            })
+            const filteredAndSortedProducts = stoneListProducts
+                .map(Product => {
+                    const level=searchLever(value,Product.name)
+                    if (level != null){
+                        return{Product,priority:level}
+                    }else{
+                        return null
+                    }
+                })
+                .filter(item => item !== null) // Elimina los elementos que no coinciden
+                .sort((a, b) => a.priority - b.priority) // Ordena por prioridad
+                .map(item => item.Product); // Devuelve solo los productos
+
+            setArray(filteredAndSortedProducts);
+
         } else {
             setArray([])
         }

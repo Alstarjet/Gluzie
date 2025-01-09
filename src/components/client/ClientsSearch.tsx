@@ -5,6 +5,7 @@ import { clientsDB } from "../../database/clientsDBController";
 import { RiAddCircleFill } from "react-icons/ri";
 import './ClientsSearch.css'
 import type { client } from '../../interfaces/client'
+import searchLever from '../../scripts/searchLever';
 
 function ClientsSearch({ }) {
   const [clients, setClients] = useState<client[]>([]);
@@ -15,22 +16,25 @@ function ClientsSearch({ }) {
     setArray([])
     const { value } = event.target;
     setName(value);
-    if (value.length>2){
-      clients.forEach(Client => {
-        const name: string = Client.name + " " + Client.lastname
-        const SinAcentos = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        const upperCase = SinAcentos.toUpperCase();
-        const letras1 = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        const letras = letras1.toUpperCase()
-        const regex = new RegExp(letras.split('').join('.*'), 'i');
-        if (regex.test(upperCase)) {
-          setArray(prevArray => [...prevArray, Client])
-        }
-      });
-    }else{
+    if (value.length > 2) {
+      const filteredAndSortedClients = clients
+        .map(Client => {
+          const level = searchLever(value, Client.name+Client.lastname)
+          if (level != null) {
+            return { Client, priority: level }
+          } else {
+            return null
+          }
+        })
+        .filter(item => item !== null) // Elimina los elementos que no coinciden
+        .sort((a, b) => a.priority - b.priority) // Ordena por prioridad
+        .map(item => item.Client); // Devuelve solo los productos
+
+      setArray(filteredAndSortedClients);
+    } else {
       setArray([])
     }
-    
+
 
   };
 
@@ -49,13 +53,13 @@ function ClientsSearch({ }) {
   return (
     <div>
       <div className='seachAndAdd'>
-        <input type="text" id="buscador" value={name} placeholder="Buscar Cliente..." onChange={handleChange} className='searchClient' autoComplete="off"/>
+        <input type="text" id="buscador" value={name} placeholder="Buscar Cliente..." onChange={handleChange} className='searchClient' autoComplete="off" />
         <Link to="/clientregister" className="ToLink"><RiAddCircleFill className='IcoAdd' /><p>Nuevo</p></Link>
       </div>
       <div className='boxClientSearch'>
-      {ArrayClientsFilter.map(item => (
-        <ClientItem DataClient={item} ></ClientItem>
-      ))}
+        {ArrayClientsFilter.map(item => (
+          <ClientItem DataClient={item} ></ClientItem>
+        ))}
       </div>
 
     </div>

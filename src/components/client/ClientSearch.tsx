@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { clientsDB } from "../../database/clientsDBController";
 import type { client } from '../../interfaces/client'
 
-interface ClientSearchProps{
-  Select:(Client:client)=> void
+interface ClientSearchProps {
+  Select: (Client: client) => void
 }
 
-function ClientSearch({Select }:ClientSearchProps) {
+function ClientSearch({ Select }: ClientSearchProps) {
   const [clients, setClients] = useState<client[]>([]);
   const [name, setName] = useState<string>('')
   const [ArrayClientsFilter, setArray] = useState<client[]>(clients)
@@ -42,7 +42,7 @@ function ClientSearch({Select }:ClientSearchProps) {
   return (
     <div>
       <div className='seachAndAdd'>
-        <input type="text" id="buscador" value={name} placeholder="Buscar Cliente..." onChange={handleChange} className='searchClient' autoComplete ="off"/>
+        <input type="text" id="buscador" value={name} placeholder="Buscar Cliente..." onChange={handleChange} className='searchClient' autoComplete="off" />
       </div>
       {(name.length > 1) && <div >{ArrayClientsFilter.map(DataClient => (
         <div key={DataClient.uuid} className='clientItem cardClear'>
