@@ -23,10 +23,10 @@ function ClientsSearch({ }) {
           if (level != null) {
             return { Client, priority: level }
           } else {
-            return null
+            return { Client, priority: 0 }
           }
         })
-        .filter(item => item !== null) // Elimina los elementos que no coinciden
+        .filter(item => item.priority !== 0) // Elimina los elementos que no coinciden
         .sort((a, b) => a.priority - b.priority) // Ordena por prioridad
         .map(item => item.Client); // Devuelve solo los productos
 
