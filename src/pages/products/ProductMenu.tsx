@@ -3,6 +3,7 @@ import { Link, } from "react-router-dom";
 import IteamCardCatalog from '../../components/catalog/IteamCardCatalog';
 import { catalogsDB } from "../../database/catalogsDBController";
 import { RiAddCircleFill } from "react-icons/ri";
+import { productsDB } from "../../database/productsDBController";
 
 import type { catalog } from '../../interfaces/catalog'
 
@@ -23,12 +24,21 @@ function ProductMenu({ }) {
             console.error("Error al cargar catalogos desde la base de datos: ", error);
         }
     };
+    const clearProduct = () => {
+        const resultado = window.confirm('¿Quieres eliminar todos los productos?');
+        if (resultado) {
+            productsDB.clearAllProducts()
+        }
+    }
 
     useEffect(() => {
         loadProducts();
     }, []);
     return (
         <div className='pageUse'>
+            <div>
+                <button onClick={()=>clearProduct()}>Borrar Productos</button>
+            </div>
             <div className='seachAndAdd'>
                 <Link to="/catalogregister" className="ToLink">
                     <RiAddCircleFill className='IcoAdd' />

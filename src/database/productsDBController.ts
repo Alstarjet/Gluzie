@@ -157,6 +157,34 @@ async function GetEditProduct(ProductObjs:productInventoryItem) {
     };
 
 }
+async function clearAllProducts(): Promise<boolean> {
+    try {
+        // Abre la base de datos
+        const db = await openDatabase();
+        // Inicia una transacción en el almacén de productos
+        const transaction = db.transaction(keysDB.products.Store, "readwrite");
+        const store = transaction.objectStore(keysDB.products.Store);
+
+        // Elimina todos los elementos del almacén
+        const request = store.clear();
+
+        return new Promise((resolve, reject) => {
+            request.onsuccess = function () {
+                console.log("Todos los productos fueron eliminados.");
+                resolve(true);
+            };
+
+            request.onerror = function () {
+                console.error("Error al eliminar los productos:", request.error);
+                reject(false);
+            };
+        });
+    } catch (error) {
+        console.error("Error en la operación:", error);
+        return false;
+    }
+}
+
 const productsDB ={
     readProducts,
     addProduct,
@@ -165,6 +193,7 @@ const productsDB ={
     readProductPerCatalog,
     readProductsOffCloud,
     updateProductCloud,
-    GetEditProduct
+    GetEditProduct,
+    clearAllProducts
 }
 export {productsDB}
