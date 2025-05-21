@@ -19,7 +19,6 @@ function ProductItem({Product,AddProduct}:productPropsAdd) {
     <tr key={Product.key}>
         <td>{Product.key}</td>
         <td>{Product.name}</td>
-        <td>{Product.page}</td>
         <td>${Product.price}</td>
         <td><button onClick={()=>AddProduct(productCart)}>Add</button></td>
     </tr>

@@ -41,7 +41,7 @@ function OrderSearch({ }) {
   }, []);
   return (
     <div>
-      <div className='seachAndAdd'>
+      <div className='seachAndAdd botspace'>
       <input type="text" id="buscador" value={name} placeholder="Buscar Pedido por cliente..." onChange={handleChange} className='searchOrder' />
       <Link to="/neworder" className="ToLink"><RiAddCircleFill className='IcoAdd'/><p>Nuevo</p></Link>
       </div>

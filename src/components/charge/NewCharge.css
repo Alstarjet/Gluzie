@@ -26,6 +26,13 @@
     margin-bottom: 0.7rem;
 
 }
+.itemaSearchProduct tr:nth-child(even) {
+      background-color: rgba(89, 171, 191, 0.486);
+
+}
+.itemaSearchProduct tr td{
+    line-height: 1.2;
+}
 .CatalogSearch button{
     background-color:rgb(12, 168, 173);
     padding: 0.3rem 1rem;
@@ -44,10 +51,14 @@
 }
 .TableResumeCharge tr{
     display: grid;  
-grid-template-columns:12% 30% 12% 18% 25% ;
-    border-bottom: 1px dashed rgb(27, 99, 20);
+    grid-template-columns:12% 30% 12% 18% 25% ;
     padding: 0.2rem 0;
+    line-height: 1.2;
 }
+.TableResumeCharge tr:nth-child(even) {
+    background-color:rgb(147, 221, 140);
+}
+
 .SelectTypeCharge{
     display: flex;
     justify-content: space-around;
